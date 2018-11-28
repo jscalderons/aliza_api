@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use \App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class UsersTableSeeder extends Seeder
     {
         //\App\User::truncate();
 
-        $user = new App\User();
+        $user = new User();
 
         $user->name = 'admin';
         $user->email = 'admin@aliza.com';
