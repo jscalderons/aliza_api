@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePetsUsersTable extends Migration
+class CreateFollowerSitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreatePetsUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('pets_users', function (Blueprint $table) {
+        Schema::create('follower_sites', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('pet_uid');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_uid');
+            $table->uuid('minisite_uid');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class CreatePetsUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pets_users');
+        Schema::dropIfExists('follower_sites');
     }
 }

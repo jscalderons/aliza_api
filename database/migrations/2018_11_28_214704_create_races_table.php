@@ -17,7 +17,7 @@ class CreateRacesTable extends Migration
             $table->increments('id');
             $table->string('name', 60);
             $table->integer('type_id')->unsigned();
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

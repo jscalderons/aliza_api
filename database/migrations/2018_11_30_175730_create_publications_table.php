@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePetsTable extends Migration
+class CreatePublicationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreatePetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pets', function (Blueprint $table) {
+        Schema::create('publications', function (Blueprint $table) {
             $table->uuid('uid');
-            $table->string('name', 40);
-            // $table->integer('race_id')->unsigned();
+            $table->uuid('minisite_uid');
+            $table->string('image');
+            $table->string('content');
+            $table->integer('views');
+            $table->integer('likes');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreatePetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pets');
+        Schema::dropIfExists('publications');
     }
 }

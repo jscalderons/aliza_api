@@ -14,7 +14,7 @@ class CreateImagesPetsTable extends Migration
     public function up()
     {
         Schema::create('images_pets', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('uid');
             $table->uuid('pet_id');
             $table->string('url', 60);
             $table->timestamps();
