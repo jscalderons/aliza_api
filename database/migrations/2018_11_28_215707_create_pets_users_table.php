@@ -17,6 +17,7 @@ class CreatePetsUsersTable extends Migration
             $table->increments('id');
             $table->uuid('pet_uid');
             $table->integer('user_id')->unsigned();
+            $table->timestamps();
         });
     }
 

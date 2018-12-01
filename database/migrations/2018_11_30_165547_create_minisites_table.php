@@ -16,15 +16,16 @@ class CreateMinisitesTable extends Migration
         Schema::create('minisites', function (Blueprint $table) {
             $table->uuid('uid');
             $table->uuid('user_id');
-            $table->string('name');
+            $table->integer('category_id')->unsigned();
+            $table->string('name', 60);
             $table->string('image');
             $table->string('description');
-            $table->string('phone', 15);
+            $table->string('phone', 20);
             $table->string('city');
-            $table->string('address');
-            $table->decimal('latitude');
-            $table->decimal('longitude');
-            $table->integer('visitors');
+            $table->string('address', 100);
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->integer('views');
             $table->timestamps();
         });
     }

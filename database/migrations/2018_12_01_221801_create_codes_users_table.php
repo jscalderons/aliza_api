@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTypesTable extends Migration
+class CreateCodesUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 60);
-            $table->text('description');
-            // $table->timestamps();
+        Schema::create('codes_users', function (Blueprint $table) {
+            $table->uuid('uid');
+            $table->integer('user_id')->unsigned();
+            $table->uuid('code_uid');
+            $table->date('validation_date');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +29,6 @@ class CreateTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('codes_users');
     }
 }
