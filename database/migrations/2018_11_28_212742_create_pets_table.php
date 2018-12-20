@@ -24,8 +24,8 @@ class CreatePetsTable extends Migration
             $table->string('sex', 1);
             $table->string('description')->nullable();
             $table->string('city');
-            $table->string('longitude');
-            $table->string('latitude');
+            $table->decimal('longitude', 9, 6);
+            $table->decimal('latitude', 9, 6);
             $table->timestamps();
         });
     }
