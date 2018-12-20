@@ -15,13 +15,18 @@ class UsersTableSeeder extends Seeder
     {
         //\App\User::truncate();
 
-        $user = new User();
+        $admin = new User();
+        $admin->name = 'admin';
+        $admin->email = 'admin@aliza.com';
+        $admin->password = Hash::make('123456');
+        $admin->remember_token = str_random(10);
+        $admin->save();
 
-        $user->name = 'admin';
-        $user->email = 'admin@aliza.com';
-        $user->password = Hash::make('123456');
-        $user->remember_token = str_random(10);
-
-        $user->save();
+        $okapia = new User();
+        $okapia->name = 'okapiasoft';
+        $okapia->email = 'info@okapiasoft.com';
+        $okapia->password = Hash::make('123456');
+        $okapia->remember_token = str_random(10);
+        $okapia->save();
     }
 }

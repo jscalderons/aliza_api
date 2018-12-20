@@ -17,4 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('/pet', 'Api\PetController');
+Route::apiResource('/pet', 'Api\PetController');
+Route::apiResource('/minisite', 'Api\MinisiteController');

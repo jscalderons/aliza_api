@@ -6,7 +6,7 @@ use \App\ImagesPet;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
-class PetTableSeeder extends Seeder
+class PetsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
