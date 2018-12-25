@@ -1,6 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+ header('Access-Control-Allow-Origin: *');
+
+// use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +15,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::apiResource('/pet', 'Api\PetController');
-Route::apiResource('/minisite', 'Api\MinisiteController');
+Route::namespace('Api')->group(function() {
+
+    Route::post('/login', 'Auth\AccessController@logIn');
+
+    Route::apiResource('/pet', 'PetController');
+    Route::apiResource('/minisite', 'MinisiteController');
+});
