@@ -15,7 +15,7 @@ class CreatePetsTable extends Migration
     {
         Schema::create('pets', function (Blueprint $table) {
             $table->uuid('uid');
-            $table->integer('user_id')->unsigned();
+            $table->uuid('user_uid');
             $table->integer('process_id')->unsigned();
             $table->string('name', 40)->nullable();
             $table->string('phone', 20);

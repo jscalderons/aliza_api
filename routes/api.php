@@ -19,12 +19,16 @@
 
 Route::namespace('Api')->group(function() {
 
-    // ACCESS
+    // access
     Route::post('/auth', 'Auth\AccessController@auth');
 
-    // PETS
+    // pets
     Route::get('/pets', 'PetController@index');
+    Route::middleware('auth:api')->post('/pets', 'PetController@store');
 
-    // MINISITES
+    // minisites
     Route::get('/minisites', 'MinisiteController@index');
+
+    // Listas
+    Route::get('/list/processes', 'ListController@getAllProcess');
 });

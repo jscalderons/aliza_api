@@ -17,7 +17,8 @@ class MinisiteController extends Controller
     {
         $minisites = Minisite::orderBy('created_at', 'ASC')
                                 ->with('category')
-                                ->paginate();
+                                ->with('user')
+                                ->paginate(6);
 
         return response()->json($minisites);
     }

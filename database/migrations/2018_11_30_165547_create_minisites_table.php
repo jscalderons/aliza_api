@@ -15,7 +15,7 @@ class CreateMinisitesTable extends Migration
     {
         Schema::create('minisites', function (Blueprint $table) {
             $table->uuid('uid');
-            $table->integer('user_id')->unsigned();
+            $table->uuid('user_uid');
             $table->integer('category_id')->unsigned();
             $table->string('name', 60);
             $table->string('image');

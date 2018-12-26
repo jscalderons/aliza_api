@@ -15,7 +15,7 @@ class CreateCodesUsersTable extends Migration
     {
         Schema::create('codes_users', function (Blueprint $table) {
             $table->uuid('uid');
-            $table->integer('user_id')->unsigned();
+            $table->uuid('user_uid');
             $table->uuid('code_uid');
             $table->date('validation_date');
             $table->timestamps();

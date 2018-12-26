@@ -27,7 +27,7 @@ class PetsTableSeeder extends Seeder
         // Hunter
         $hunter = new Pet();
         $hunter->uid = '8f77b4dc-4239-4fac-9ca0-577de2960506';//(string) Str::uuid();
-        $hunter->user_id = 2;
+        $hunter->user_uid = 2;
         $hunter->process_id = 2;
         $hunter->name = 'Hunter';
         $hunter->phone = '3022095243';
@@ -44,7 +44,7 @@ class PetsTableSeeder extends Seeder
         // Tomasa
         $tomasa = new Pet();
         $tomasa->uid = 'c5d610a0-f162-4c60-858c-a4a577032e0c';//(string) Str::uuid();
-        $tomasa->user_id = 2;
+        $tomasa->user_uid = 2;
         $tomasa->process_id = 1;
         $tomasa->name = 'Tomasa';
         $tomasa->phone = '3022095243';
@@ -82,7 +82,7 @@ class PetsTableSeeder extends Seeder
         // hunter2
         $hunter2 = new Pet();
         $hunter2->uid = '8f77b4dc-4239-4fac-9ca0-577de2960506';//(string) Str::uuid();
-        $hunter2->user_id = 2;
+        $hunter2->user_uid = 2;
         $hunter2->process_id = 2;
         $hunter2->name = 'hunter2';
         $hunter2->phone = '3022095243';
@@ -99,7 +99,7 @@ class PetsTableSeeder extends Seeder
         // Tomasa2
         $tomasa2 = new Pet();
         $tomasa2->uid = 'c5d610a0-f162-4c60-858c-a4a577032e0c';//(string) Str::uuid();
-        $tomasa2->user_id = 2;
+        $tomasa2->user_uid = 2;
         $tomasa2->process_id = 1;
         $tomasa2->name = 'Tomasa2';
         $tomasa2->phone = '3022095243';
@@ -116,7 +116,7 @@ class PetsTableSeeder extends Seeder
         // hunter3
         $hunter3 = new Pet();
         $hunter3->uid = '8f77b4dc-4239-4fac-9ca0-577de2960506';//(string) Str::uuid();
-        $hunter3->user_id = 2;
+        $hunter3->user_uid = 2;
         $hunter3->process_id = 2;
         $hunter3->name = 'hunter3';
         $hunter3->phone = '3022095243';
@@ -133,7 +133,7 @@ class PetsTableSeeder extends Seeder
         // Tomasa3
         $tomasa3 = new Pet();
         $tomasa3->uid = 'c5d610a0-f162-4c60-858c-a4a577032e0c';//(string) Str::uuid();
-        $tomasa3->user_id = 2;
+        $tomasa3->user_uid = 2;
         $tomasa3->process_id = 1;
         $tomasa3->name = 'Tomasa3';
         $tomasa3->phone = '3022095243';
@@ -150,7 +150,7 @@ class PetsTableSeeder extends Seeder
         // hunter4
         $hunter4 = new Pet();
         $hunter4->uid = '8f77b4dc-4239-4fac-9ca0-577de2960506';//(string) Str::uuid();
-        $hunter4->user_id = 2;
+        $hunter4->user_uid = 2;
         $hunter4->process_id = 2;
         $hunter4->name = 'hunter4';
         $hunter4->phone = '3022095243';
@@ -167,7 +167,7 @@ class PetsTableSeeder extends Seeder
         // Tomasa4
         $tomasa4 = new Pet();
         $tomasa4->uid = 'c5d610a0-f162-4c60-858c-a4a577032e0c';//(string) Str::uuid();
-        $tomasa4->user_id = 2;
+        $tomasa4->user_uid = 2;
         $tomasa4->process_id = 1;
         $tomasa4->name = 'Tomasa4';
         $tomasa4->phone = '3022095243';
@@ -185,7 +185,7 @@ class PetsTableSeeder extends Seeder
         // hunter5
         $hunter5 = new Pet();
         $hunter5->uid = '8f77b4dc-4239-4fac-9ca0-577de2960506';//(string) Str::uuid();
-        $hunter5->user_id = 2;
+        $hunter5->user_uid = 2;
         $hunter5->process_id = 2;
         $hunter5->name = 'hunter5';
         $hunter5->phone = '3022095243';
@@ -202,7 +202,7 @@ class PetsTableSeeder extends Seeder
         // Tomasa5
         $tomasa5 = new Pet();
         $tomasa5->uid = 'c5d610a0-f162-4c60-858c-a4a577032e0c';//(string) Str::uuid();
-        $tomasa5->user_id = 2;
+        $tomasa5->user_uid = 2;
         $tomasa5->process_id = 1;
         $tomasa5->name = 'Tomasa5';
         $tomasa5->phone = '3022095243';
@@ -220,7 +220,7 @@ class PetsTableSeeder extends Seeder
         // hunter6
         $hunter6 = new Pet();
         $hunter6->uid = '8f77b4dc-4239-4fac-9ca0-577de2960506';//(string) Str::uuid();
-        $hunter6->user_id = 2;
+        $hunter6->user_uid = 2;
         $hunter6->process_id = 2;
         $hunter6->name = 'hunter6';
         $hunter6->phone = '3022095243';
@@ -237,7 +237,7 @@ class PetsTableSeeder extends Seeder
         // Tomasa6
         $tomasa6 = new Pet();
         $tomasa6->uid = 'c5d610a0-f162-4c60-858c-a4a577032e0c';//(string) Str::uuid();
-        $tomasa6->user_id = 2;
+        $tomasa6->user_uid = 2;
         $tomasa6->process_id = 1;
         $tomasa6->name = 'Tomasa6';
         $tomasa6->phone = '3022095243';
@@ -254,7 +254,7 @@ class PetsTableSeeder extends Seeder
         // hunter7
         $hunter7 = new Pet();
         $hunter7->uid = '8f77b4dc-4239-4fac-9ca0-577de2960506';//(string) Str::uuid();
-        $hunter7->user_id = 2;
+        $hunter7->user_uid = 2;
         $hunter7->process_id = 2;
         $hunter7->name = 'hunter7';
         $hunter7->phone = '3022095243';
@@ -271,7 +271,7 @@ class PetsTableSeeder extends Seeder
         // Tomasa7
         $tomasa7 = new Pet();
         $tomasa7->uid = 'c5d610a0-f162-4c60-858c-a4a577032e0c';//(string) Str::uuid();
-        $tomasa7->user_id = 2;
+        $tomasa7->user_uid = 2;
         $tomasa7->process_id = 1;
         $tomasa7->name = 'Tomasa7';
         $tomasa7->phone = '3022095243';
@@ -288,7 +288,7 @@ class PetsTableSeeder extends Seeder
         // hunter8
         $hunter8 = new Pet();
         $hunter8->uid = '8f77b4dc-4239-4fac-9ca0-577de2960506';//(string) Str::uuid();
-        $hunter8->user_id = 2;
+        $hunter8->user_uid = 2;
         $hunter8->process_id = 2;
         $hunter8->name = 'hunter8';
         $hunter8->phone = '3022095243';
@@ -305,7 +305,7 @@ class PetsTableSeeder extends Seeder
         // Tomasa8
         $tomasa8 = new Pet();
         $tomasa8->uid = 'c5d610a0-f162-4c60-858c-a4a577032e0c';//(string) Str::uuid();
-        $tomasa8->user_id = 2;
+        $tomasa8->user_uid = 2;
         $tomasa8->process_id = 1;
         $tomasa8->name = 'Tomasa8';
         $tomasa8->phone = '3022095243';

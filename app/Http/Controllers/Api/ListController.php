@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 
 class ListController extends Controller
 {
-    public function getAllProccess() {
+    public function getAllProcess() {
+        $processes = \App\Process::all();
 
+        return response($processes);
     }
 }

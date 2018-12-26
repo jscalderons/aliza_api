@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use \App\Pet;
+use \App\ImagesPet;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,7 +33,39 @@ class PetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $images = $request->images;
+
+        foreach ($images as $image) {
+            $image = str_replace('data:image/jpg;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            \File::put(storage_path(). '/' . '123.jpg', base64_decode($image));
+        }
+
+        dd($images);
+        $pet = new Pet();
+        $pet->uid = Str::uuid();
+        $pet->user_uid = $request->user_uid;
+        $pet->process_id = $request->process_id;
+        $pet->name = $request->name;
+        $pet->phone = $request->phone;
+        $pet->months = $request->months;
+        $pet->sterilized = $request->sterilized;
+        $pet->vaccinated = $request->vaccinated;
+        $pet->sex = $request->sex;
+        $pet->description = $request->description;
+        $pet->city = $request->city;
+        $pet->longitude = $request->longitude;
+        $pet->latitude = $request->longitude;
+
+        if ($pet->save()) {
+
+
+            $image = new ImagesPet();
+            $image->pet_uid = $pet->uid;
+
+        }
+
+        return response($pet);
     }
 
     /**

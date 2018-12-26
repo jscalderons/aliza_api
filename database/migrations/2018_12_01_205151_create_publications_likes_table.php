@@ -15,7 +15,7 @@ class CreatePublicationsLikesTable extends Migration
     {
         Schema::create('publications_likes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->uuid('user_uid');
             $table->integer('publication_uid')->unsigned();
             $table->timestamp('created_at')->nullable();
         });

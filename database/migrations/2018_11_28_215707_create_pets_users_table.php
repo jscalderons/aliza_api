@@ -16,7 +16,7 @@ class CreatePetsUsersTable extends Migration
         Schema::create('pets_users', function (Blueprint $table) {
             $table->increments('id');
             $table->uuid('pet_uid');
-            $table->integer('user_id')->unsigned();
+            $table->uuid('user_uid');
             $table->timestamps();
         });
     }

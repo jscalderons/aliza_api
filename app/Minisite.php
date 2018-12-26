@@ -14,4 +14,8 @@ class Minisite extends Model
     public function category() {
         return $this->hasOne('App\Category', 'id', 'category_id');
     }
+
+    public function user() {
+        return $this->hasOne('App\User', 'uid', 'user_uid');
+    }
 }
