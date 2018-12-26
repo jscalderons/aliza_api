@@ -15,7 +15,10 @@ class PetController extends Controller
      */
     public function index()
     {
-        $pets = Pet::orderBy('created_at', 'ASC')->with('images')->paginate();
+        $pets = Pet::orderBy('created_at', 'ASC')
+                ->with('images')
+                ->with('User')
+                ->paginate(6);
 
         return response()->json($pets);
     }

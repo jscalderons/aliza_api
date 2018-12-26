@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Str;
 use \App\Minisite;
+use \App\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class MinisitesTableSeeder extends Seeder
@@ -19,7 +20,7 @@ class MinisitesTableSeeder extends Seeder
         $okapia->user_id = 2;
         $okapia->category_id = 1;
         $okapia->name = 'OkapiaSoft';
-        $okapia->image = url('/storage/images/okapiasoft.png');
+        $okapia->image = 'okapiasoft.png';
         $okapia->description = 'Nos encargamos de la gestión tecnológica para que usted se encargue de lo más importante, hacer crecer su negocio.';
         $okapia->phone = '573022095243';
         $okapia->city = 'Cali';
@@ -29,5 +30,10 @@ class MinisitesTableSeeder extends Seeder
         $okapia->views = 1002;
 
         $okapia->save();
+
+        $category = new Category();
+        $category->name = 'Veterinaria';
+        $category->save();
+
     }
 }

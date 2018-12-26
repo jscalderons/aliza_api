@@ -87,19 +87,6 @@
                 <div class="title m-b-md">
                     {{ env('APP_NAME') }}
                 </div>
-
-                <div class="list-group">
-                   <a   class="list-group-item list-group-item-action list-group-item-success"
-                        target="_blank"
-                        href="http://aliza-api.test/api/minisite">
-                            <kbd>get:</kbd> all minisites
-                    </a>
-                   <a   class="list-group-item list-group-item-action list-group-item-success"
-                        target="_blank"
-                        href="http://aliza-api.test/api/pet">
-                            <kbd>get:</kbd> all minisites
-                    </a>
-                </div>
             </div>
         </div>
     </body>

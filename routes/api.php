@@ -1,7 +1,5 @@
 <?php
 
- header('Access-Control-Allow-Origin: *');
-
 // use Illuminate\Http\Request;
 
 /*
@@ -21,8 +19,12 @@
 
 Route::namespace('Api')->group(function() {
 
-    Route::post('/login', 'Auth\AccessController@logIn');
+    // ACCESS
+    Route::post('/auth', 'Auth\AccessController@auth');
 
-    Route::apiResource('/pet', 'PetController');
-    Route::apiResource('/minisite', 'MinisiteController');
+    // PETS
+    Route::get('/pets', 'PetController@index');
+
+    // MINISITES
+    Route::get('/minisites', 'MinisiteController@index');
 });

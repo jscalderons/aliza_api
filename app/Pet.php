@@ -15,6 +15,10 @@ class Pet extends Model
 
     public function images()
     {
-        return $this->hasOne('App\ImagesPet', 'pet_uid', 'uid');
+        return $this->hasMany('App\ImagesPet', 'pet_uid', 'uid');
+    }
+
+    public function user() {
+        return $this->hasOne('App\User', 'id', 'user_id');
     }
 }
