@@ -7,15 +7,18 @@ use \App\ImagesPet;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class PetController extends Controller
 {
+    private $storagePath = '/images/pets';
     /**
-     * Display a listing of the resource.
+     * Retorna una lista de mascotas.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getAll(Request $request)
     {
         $pets = Pet::orderBy('created_at', 'ASC')
                 ->with('images')
@@ -26,6 +29,22 @@ class PetController extends Controller
     }
 
     /**
+     * Retorna una lista de mascotas del usuario.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllByUser(Request $request) {
+        $userPets = Pet::orderBy('created_at', 'ASC')
+                    ->where('user_uid', $request->user()->uid)
+                    ->with('images')
+                    ->with('User')
+                    ->paginate(6);
+
+        return response($userPets);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -33,39 +52,61 @@ class PetController extends Controller
      */
     public function store(Request $request)
     {
-        $images = $request->images;
+        $newPet = new Pet();
+        $newPet->uid = Str::uuid();
+        $newPet->user_uid = $request->user()->uid;
+        $newPet->process_id = $request->process_id;
+        $newPet->name = $request->name;
+        $newPet->phone = $request->phone;
+        $newPet->months = $request->months;
+        $newPet->sterilized = $request->sterilized;
+        $newPet->vaccinated = $request->vaccinated;
+        $newPet->sex = $request->sex;
+        $newPet->description = $request->description;
+        $newPet->city = $request->city;
+        $newPet->longitude = $request->longitude;
+        $newPet->latitude = $request->latitude;
 
-        foreach ($images as $image) {
-            $image = str_replace('data:image/jpg;base64,', '', $image);
-            $image = str_replace(' ', '+', $image);
-            \File::put(storage_path(). '/' . '123.jpg', base64_decode($image));
+        if ($newPet->save()) {
+            $this->storeImages($request->images, $newPet->uid);
         }
 
-        dd($images);
-        $pet = new Pet();
-        $pet->uid = Str::uuid();
-        $pet->user_uid = $request->user_uid;
-        $pet->process_id = $request->process_id;
-        $pet->name = $request->name;
-        $pet->phone = $request->phone;
-        $pet->months = $request->months;
-        $pet->sterilized = $request->sterilized;
-        $pet->vaccinated = $request->vaccinated;
-        $pet->sex = $request->sex;
-        $pet->description = $request->description;
-        $pet->city = $request->city;
-        $pet->longitude = $request->longitude;
-        $pet->latitude = $request->longitude;
+        return response($newPet);
+    }
 
-        if ($pet->save()) {
+    /**
+     * Convierte y almacena una o varias imagenes en base64 a la ruta publica del store
+     *
+     * @param Array $images
+     * @param String $uid
+    */
+    private function storeImages(Array $images, String $uid) {
 
+        foreach ($images as $base64_image) {
+            if (preg_match('/^data:image\/(\w+);base64,/', $base64_image)) {
+                $data = substr($base64_image, strpos($base64_image, ',') + 1);
+                $data = base64_decode($data);
 
-            $image = new ImagesPet();
-            $image->pet_uid = $pet->uid;
+                $filename = str_random(10) . ".jpg";
 
+                $stored = Storage::disk('public')->put("{$this->storagePath}/{$uid}/{$filename}", $data);
+
+                if ($stored) {
+                    $this->registerImage($filename, $uid);
+                }
+            }
         }
+    }
 
-        return response($pet);
+    /**
+     *
+    */
+    public function registerImage(String $filename, String $uid) {
+        $image = new ImagesPet();
+        $image->uid = Str::uuid();
+        $image->pet_uid = $uid;
+        $image->filename = $filename;
+        $image->save();
     }
 
     /**

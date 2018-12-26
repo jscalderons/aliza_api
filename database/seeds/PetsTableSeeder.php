@@ -62,20 +62,20 @@ class PetsTableSeeder extends Seeder
         $hunterPhoto = new ImagesPet();
         $hunterPhoto->uid = (string) Str::uuid();
         $hunterPhoto->pet_uid = $hunter->uid;
-        $hunterPhoto->url = 'hunter.jpg';
+        $hunterPhoto->filename = 'hunter.jpg';
         $hunterPhoto->save();
 
         // imagenes
         $tomasaPhoto = new ImagesPet();
         $tomasaPhoto->uid = (string) Str::uuid();
         $tomasaPhoto->pet_uid = $tomasa->uid;
-        $tomasaPhoto->url = 'tomasa.jpg';
+        $tomasaPhoto->filename = 'tomasa.jpg';
         $tomasaPhoto->save();
 
         $tomasaPhoto = new ImagesPet();
         $tomasaPhoto->uid = (string) Str::uuid();
         $tomasaPhoto->pet_uid = $tomasa->uid;
-        $tomasaPhoto->url = 'tomasa_2.jpg';
+        $tomasaPhoto->filename = 'tomasa_2.jpg';
         $tomasaPhoto->save();
 
 
@@ -323,91 +323,91 @@ class PetsTableSeeder extends Seeder
         $hunterPhoto = new ImagesPet();
         $hunterPhoto->uid = (string) Str::uuid();
         $hunterPhoto->pet_uid = $hunter2->uid;
-        $hunterPhoto->url = 'hunter.jpg';
+        $hunterPhoto->filename = 'hunter.jpg';
         $hunterPhoto->save();
 
         $tomasaPhoto = new ImagesPet();
         $tomasaPhoto->uid = (string) Str::uuid();
         $tomasaPhoto->pet_uid = $tomasa2->uid;
-        $tomasaPhoto->url = 'tomasa_2.jpg';
+        $tomasaPhoto->filename = 'tomasa_2.jpg';
         $tomasaPhoto->save();
 
         // imagenes
         $hunterPhoto = new ImagesPet();
         $hunterPhoto->uid = (string) Str::uuid();
         $hunterPhoto->pet_uid = $hunter3->uid;
-        $hunterPhoto->url = 'hunter.jpg';
+        $hunterPhoto->filename = 'hunter.jpg';
         $hunterPhoto->save();
 
         $tomasaPhoto = new ImagesPet();
         $tomasaPhoto->uid = (string) Str::uuid();
         $tomasaPhoto->pet_uid = $tomasa3->uid;
-        $tomasaPhoto->url = 'tomasa.jpg';
+        $tomasaPhoto->filename = 'tomasa.jpg';
         $tomasaPhoto->save();
 
         // imagenes
         $hunterPhoto = new ImagesPet();
         $hunterPhoto->uid = (string) Str::uuid();
         $hunterPhoto->pet_uid = $hunter4->uid;
-        $hunterPhoto->url = 'hunter.jpg';
+        $hunterPhoto->filename = 'hunter.jpg';
         $hunterPhoto->save();
 
         $tomasaPhoto = new ImagesPet();
         $tomasaPhoto->uid = (string) Str::uuid();
         $tomasaPhoto->pet_uid = $tomasa4->uid;
-        $tomasaPhoto->url = 'tomasa_2.jpg';
+        $tomasaPhoto->filename = 'tomasa_2.jpg';
         $tomasaPhoto->save();
 
         // imagenes
         $hunterPhoto = new ImagesPet();
         $hunterPhoto->uid = (string) Str::uuid();
         $hunterPhoto->pet_uid = $hunter5->uid;
-        $hunterPhoto->url = 'hunter.jpg';
+        $hunterPhoto->filename = 'hunter.jpg';
         $hunterPhoto->save();
 
         $tomasaPhoto = new ImagesPet();
         $tomasaPhoto->uid = (string) Str::uuid();
         $tomasaPhoto->pet_uid = $tomasa5->uid;
-        $tomasaPhoto->url = 'tomasa.jpg';
+        $tomasaPhoto->filename = 'tomasa.jpg';
         $tomasaPhoto->save();
 
         // imagenes
         $hunterPhoto = new ImagesPet();
         $hunterPhoto->uid = (string) Str::uuid();
         $hunterPhoto->pet_uid = $hunter6->uid;
-        $hunterPhoto->url = 'hunter.jpg';
+        $hunterPhoto->filename = 'hunter.jpg';
         $hunterPhoto->save();
 
         $tomasaPhoto = new ImagesPet();
         $tomasaPhoto->uid = (string) Str::uuid();
         $tomasaPhoto->pet_uid = $tomasa6->uid;
-        $tomasaPhoto->url = 'tomasa_2.jpg';
+        $tomasaPhoto->filename = 'tomasa_2.jpg';
         $tomasaPhoto->save();
 
         // imagenes
         $hunterPhoto = new ImagesPet();
         $hunterPhoto->uid = (string) Str::uuid();
         $hunterPhoto->pet_uid = $hunter7->uid;
-        $hunterPhoto->url = 'hunter.jpg';
+        $hunterPhoto->filename = 'hunter.jpg';
         $hunterPhoto->save();
 
         $tomasaPhoto = new ImagesPet();
         $tomasaPhoto->uid = (string) Str::uuid();
         $tomasaPhoto->pet_uid = $tomasa7->uid;
-        $tomasaPhoto->url = 'tomasa.jpg';
+        $tomasaPhoto->filename = 'tomasa.jpg';
         $tomasaPhoto->save();
 
         // imagenes
         $hunterPhoto = new ImagesPet();
         $hunterPhoto->uid = (string) Str::uuid();
         $hunterPhoto->pet_uid = $hunter8->uid;
-        $hunterPhoto->url = 'hunter.jpg';
+        $hunterPhoto->filename = 'hunter.jpg';
         $hunterPhoto->save();
 
         $tomasaPhoto = new ImagesPet();
         $tomasaPhoto->uid = (string) Str::uuid();
         $tomasaPhoto->pet_uid = $tomasa8->uid;
-        $tomasaPhoto->url = 'tomasa_2.jpg';
+        $tomasaPhoto->filename = 'tomasa_2.jpg';
         $tomasaPhoto->save();
     }
 }

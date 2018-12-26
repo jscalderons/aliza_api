@@ -16,7 +16,7 @@ class CreateImagesPetsTable extends Migration
         Schema::create('images_pets', function (Blueprint $table) {
             $table->uuid('uid');
             $table->uuid('pet_uid');
-            $table->string('url');
+            $table->string('filename', 14);
             $table->timestamps();
         });
     }

@@ -10,6 +10,6 @@ class ListController extends Controller
     public function getAllProcess() {
         $processes = \App\Process::all();
 
-        return response($processes);
+        return response(['data' => $processes]);
     }
 }

@@ -23,8 +23,9 @@ Route::namespace('Api')->group(function() {
     Route::post('/auth', 'Auth\AccessController@auth');
 
     // pets
-    Route::get('/pets', 'PetController@index');
-    Route::middleware('auth:api')->post('/pets', 'PetController@store');
+    Route::get('/pets', 'PetController@getAll'); // Obtener todas las mascotas
+    Route::middleware('auth:api')->get('/user/pets', 'PetController@getAllByUser'); // Obtener todas las mascotas del usuario
+    Route::middleware('auth:api')->post('/pets', 'PetController@store'); // agregar mascotas
 
     // minisites
     Route::get('/minisites', 'MinisiteController@index');
