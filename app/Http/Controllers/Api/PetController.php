@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use \App\Pet;
-use \App\ImagesPet;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Traits\RestControllerTrait;
+use App\Http\Requests\Pets\StorePetRequest;
 
 class PetController extends Controller
 {
+    use RestControllerTrait;
+
     private $storagePath = '/images/pets';
     /**
      * Retorna una lista de mascotas.
@@ -18,54 +22,26 @@ class PetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getAll(Request $request)
-    {
-        $pets = Pet::orderBy('created_at', 'ASC')
-                ->with('images')
+    public function index(Request $request) {
+        $data = Pet::orderBy('created_at', 'ASC')
                 ->with('User')
                 ->paginate(6);
 
-        return response()->json($pets);
-    }
-
-    /**
-     * Retorna una lista de mascotas del usuario.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function getAllByUser(Request $request) {
-        $userPets = Pet::orderBy('created_at', 'ASC')
-                    ->where('user_uid', $request->user()->uid)
-                    ->with('images')
-                    ->with('User')
-                    ->paginate(6);
-
-        return response($userPets);
+        return response()->json($data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StorePetRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePetRequest $request)
     {
-        $newPet = new Pet();
+        $newPet = new Pet($request->all());
         $newPet->uid = Str::uuid();
         $newPet->user_uid = $request->user()->uid;
-        $newPet->process_id = $request->process_id;
-        $newPet->name = $request->name;
-        $newPet->phone = $request->phone;
-        $newPet->months = $request->months;
-        $newPet->sterilized = $request->sterilized;
-        $newPet->vaccinated = $request->vaccinated;
-        $newPet->sex = $request->sex;
-        $newPet->description = $request->description;
-        $newPet->city = $request->city;
-        $newPet->longitude = $request->longitude;
-        $newPet->latitude = $request->latitude;
+
 
         if ($newPet->save()) {
             $this->storeImages($request->images, $newPet->uid);
@@ -99,10 +75,13 @@ class PetController extends Controller
     }
 
     /**
+     * Registra una imagen subida al servidor a la base de datos
      *
+     * @param String $filename
+     * @param String $uid
     */
-    public function registerImage(String $filename, String $uid) {
-        $image = new ImagesPet();
+    private function registerImage(String $filename, String $uid) {
+        $image = new \App\ImagesPet();
         $image->uid = Str::uuid();
         $image->pet_uid = $uid;
         $image->filename = $filename;
@@ -112,12 +91,12 @@ class PetController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Request  $request
+     * @param  String  $uid
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show(Pet $pet) {
+        return $this->successResponse($pet);
     }
 
     /**

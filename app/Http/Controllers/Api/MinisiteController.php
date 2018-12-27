@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use \App\Minisite;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\RestControllerTrait;
 
 class MinisiteController extends Controller
 {
+    use RestControllerTrait;
+
+    private $storagePath = '/images/sites';
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +37,24 @@ class MinisiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newSite = new Minisite($request->all());
+
+        $newSite->uid = Str::uuid();
+        $newSite->user_uid = $request->user()->uid;
+
+        if ($newSite->save()) {
+            $filename = $this->uploadBase64Image($request->image, $newSite->uid, $this->storagePath);
+
+            $newSite->image = $filename;
+
+            $newSite->update();
+        }
+
+        return $this->successResponse($newSite);
+    }
+
+    public function visit() {
+
     }
 
     /**

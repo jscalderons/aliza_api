@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePublicationsLikesTable extends Migration
+class CreateFavoritesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePublicationsLikesTable extends Migration
      */
     public function up()
     {
-        Schema::create('publications_likes', function (Blueprint $table) {
+        Schema::create('favorites', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('pet_uid');
             $table->uuid('user_uid');
-            $table->integer('publication_uid')->unsigned();
-            $table->timestamp('created_at')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ class CreatePublicationsLikesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publications_likes');
+        Schema::dropIfExists('favorites');
     }
 }

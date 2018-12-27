@@ -6,9 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Minisite extends Model
 {
+    public $incrementing = false;
+
+    protected $primaryKey = 'uid';
+
     protected $hidden = [
         'created_at',
         'updated_at'
+    ];
+
+    protected $fillable = [
+        'category_id',
+        'name',
+        'description',
+        'phone',
+        'city',
+        'address',
+        'latitude',
+        'longitude',
     ];
 
     public function category() {

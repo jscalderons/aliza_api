@@ -10,6 +10,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    public $incrementing = false;
+
+    protected $primaryKey = 'uid';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -33,5 +37,13 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public $incrementing = false;
+
+
+    public function favorites() {
+        return $this->belongsToMany('App\Pet', 'favorites', 'user_uid', 'pet_uid')->withTimeStamps();
+    }
+
+    public function pets() {
+        return $this->hasMany('App\Pet');
+    }
 }

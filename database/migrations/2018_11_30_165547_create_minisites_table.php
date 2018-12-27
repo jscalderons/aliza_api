@@ -18,14 +18,14 @@ class CreateMinisitesTable extends Migration
             $table->uuid('user_uid');
             $table->integer('category_id')->unsigned();
             $table->string('name', 60);
-            $table->string('image');
-            $table->string('description');
+            $table->string('image', 14)->nullable();
+            $table->string('description')->nullable();
             $table->string('phone', 20);
-            $table->string('city');
-            $table->string('address', 100);
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->integer('views');
+            $table->string('city')->nullable();
+            $table->string('address', 100)->nullable();
+            $table->string('latitude')->default(0);
+            $table->string('longitude')->default(0);
+            $table->integer('views')->default(0);
             $table->timestamps();
         });
     }

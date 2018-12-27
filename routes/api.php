@@ -23,13 +23,36 @@ Route::namespace('Api')->group(function() {
     Route::post('/auth', 'Auth\AccessController@auth');
 
     // pets
-    Route::get('/pets', 'PetController@getAll'); // Obtener todas las mascotas
-    Route::middleware('auth:api')->get('/user/pets', 'PetController@getAllByUser'); // Obtener todas las mascotas del usuario
-    Route::middleware('auth:api')->post('/pets', 'PetController@store'); // agregar mascotas
+        // [GET]
+        Route::get('/pets', 'PetController@index'); // Obtener todas las mascotas
+        Route::middleware('auth:api')->get('/pet/{pet}', 'PetController@show'); // Obtener todas las mascotas del usuario
+
+        // [POST]
+        Route::middleware('auth:api')->post('/pets', 'PetController@store'); // nueva mascotas
+
+
+
 
     // minisites
-    Route::get('/minisites', 'MinisiteController@index');
+        // [GET]
+        Route::get('/minisites', 'MinisiteController@index');
+
+        // [POST]
+        Route::middleware('auth:api')->post('/minisites', 'MinisiteController@store');
 
     // Listas
-    Route::get('/list/processes', 'ListController@getAllProcess');
+        // [GET]
+        Route::get('/list/processes', 'ListController@getAllProcesses');
+        Route::get('/list/categories', 'ListController@getAllCategories');
+
+    // User
+        // [GET]
+        Route::middleware('auth:api')->get('/my_favorites', 'UserController@myFavorites'); // Obtener todas las mascotas del usuario
+        Route::middleware('auth:api')->get('/my_pets', 'UserController@myPets'); // Obtener todas las mascotas del usuario
+
+        // [POST]
+        Route::middleware('auth:api')->post('/favorite/{pet}', 'UserController@favoritePet'); // agregar favorito
+
+        // [PUT]
+        Route::middleware('auth:api')->put('/unfavorite/{pet}', 'UserController@unFavoritePet'); // eliminar favorito
 });
