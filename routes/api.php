@@ -27,15 +27,15 @@ Route::namespace('Api')->group(function() {
         Route::middleware('auth:api')->get('/pet/{uid}', 'PetController@show'); // Obtener todas las mascotas del usuario
 
         // [POST]
-        Route::middleware('auth:api')->post('/pets', 'PetController@store'); // nueva mascotas
+        Route::middleware('auth:api')->post('/pet/create', 'PetController@store'); // nueva mascotas
         Route::post('/pets', 'PetController@index'); // Obtener todas las mascotas
 
     // ================== minisites ================== //
         // [GET]
-        Route::get('/minisites', 'MinisiteController@index');
+        Route::get('/sites', 'MinisiteController@index');
 
         // [POST]
-        Route::middleware('auth:api')->post('/minisites', 'MinisiteController@store');
+        Route::middleware('auth:api')->post('/site/create', 'MinisiteController@store');
 
     // ================== Listas ================== //
         // [GET]
@@ -60,5 +60,5 @@ Route::namespace('Api')->group(function() {
         Route::get('/posts', 'PostController@index'); // Obtener todos las publicaciones
 
         // [POST]
-        Route::middleware('auth:api')->post('/posts', 'PostController@store'); // Registrar una nueva publicacion
+        Route::middleware('auth:api')->post('/post/create', 'PostController@store'); // Registrar una nueva publicacion
 });
