@@ -88,7 +88,7 @@ trait RestControllerTrait {
             $data = substr($base64_image, strpos($base64_image, ',') + 1);
             $data = base64_decode($data);
 
-            Storage::disk($disk)->put("{$path}/{$uid}/{$filename}", $data);
+            Storage::disk($disk)->put("images/{$path}/{$uid}/{$filename}", $data);
         }
 
         return $filename;
@@ -135,13 +135,13 @@ trait RestControllerTrait {
     }
 
 
-	public function errorResponse($data) {
+	public function errorResponse($data, $message = null) {
 
 		$response = [
 			'code' => 422,
 			'status' => 'error',
 			'data' => $data,
-			'message' => 'Unprocessable Entity'
+			'message' => $message ?? 'Unprocessable Entity'
 		];
 		return response()->json($response, $response['code']);
 	}

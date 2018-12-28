@@ -31,7 +31,7 @@ class MinisitesTableSeeder extends Seeder
         $okapia->image = 'okapiasoft.png';
         $okapia->description = 'Nos encargamos de la gestión tecnológica para que usted se encargue de lo más importante, hacer crecer su negocio.';
         $okapia->phone = '573022095243';
-        $okapia->city = 'Cali';
+        $okapia->location = 'Cali';
         $okapia->address = 'Cl. Falsa 123, Springfield';
         $okapia->longitude = '3.3950619';
         $okapia->latitude = '-76.5957046';

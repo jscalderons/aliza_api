@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use \App\Http\Traits\RestControllerTrait;
 
 class AccessController extends Controller
 {
-    // name
-    // email
-    // Inicia sesión en la api
+    use RestControllerTrait;
+
     public function auth(Request $request) {
 
         $findUser = User::where('email', $request->email)->first();

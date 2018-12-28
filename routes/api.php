@@ -19,40 +19,46 @@
 
 Route::namespace('Api')->group(function() {
 
-    // access
+    // ================== access ================== //
     Route::post('/auth', 'Auth\AccessController@auth');
 
-    // pets
+    // ================== pets ================== //
         // [GET]
-        Route::get('/pets', 'PetController@index'); // Obtener todas las mascotas
-        Route::middleware('auth:api')->get('/pet/{pet}', 'PetController@show'); // Obtener todas las mascotas del usuario
+        Route::middleware('auth:api')->get('/pet/{uid}', 'PetController@show'); // Obtener todas las mascotas del usuario
 
         // [POST]
         Route::middleware('auth:api')->post('/pets', 'PetController@store'); // nueva mascotas
+        Route::post('/pets', 'PetController@index'); // Obtener todas las mascotas
 
-
-
-
-    // minisites
+    // ================== minisites ================== //
         // [GET]
         Route::get('/minisites', 'MinisiteController@index');
 
         // [POST]
         Route::middleware('auth:api')->post('/minisites', 'MinisiteController@store');
 
-    // Listas
+    // ================== Listas ================== //
         // [GET]
         Route::get('/list/processes', 'ListController@getAllProcesses');
         Route::get('/list/categories', 'ListController@getAllCategories');
 
-    // User
+    // ================== User ================== //
         // [GET]
         Route::middleware('auth:api')->get('/my_favorites', 'UserController@myFavorites'); // Obtener todas las mascotas del usuario
         Route::middleware('auth:api')->get('/my_pets', 'UserController@myPets'); // Obtener todas las mascotas del usuario
+        Route::middleware('auth:api')->get('/my_sites', 'UserController@mySites'); // Obtener todas las mascotas del usuario
+        Route::middleware('auth:api')->get('/my_posts', 'UserController@myPosts'); // Obtener todas las mascotas del usuario
 
         // [POST]
         Route::middleware('auth:api')->post('/favorite/{pet}', 'UserController@favoritePet'); // agregar favorito
 
         // [PUT]
         Route::middleware('auth:api')->put('/unfavorite/{pet}', 'UserController@unFavoritePet'); // eliminar favorito
+
+    // ================== Posts ================== //
+        // [GET]
+        Route::get('/posts', 'PostController@index'); // Obtener todos las publicaciones
+
+        // [POST]
+        Route::middleware('auth:api')->post('/posts', 'PostController@store'); // Registrar una nueva publicacion
 });

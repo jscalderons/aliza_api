@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use \App\Pet;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Traits\RestControllerTrait;
@@ -16,18 +15,44 @@ class PetController extends Controller
     use RestControllerTrait;
 
     private $storagePath = '/images/pets';
+
     /**
      * Retorna una lista de mascotas.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request) {
-        $data = Pet::orderBy('created_at', 'ASC')
-                ->with('User')
-                ->paginate(6);
+    public function index(Request $request)
+    {
+        $pets = Pet::approved();
+        $queries = [];
 
-        return response()->json($data);
+        // Filtros
+        if ($request->has('filters')) {
+            foreach ($request->filters as $key => $value) {
+                if ($value !== null) {
+                    $pets->where($key, $value);
+                    $queries[$key] = $value;
+                }
+            }
+        }
+
+        // Ordenamiento
+        if ($request->has('sort') && $request->sort !== null) {
+            $pets->orderBy('created_at', $request->sort);
+            $queries['sort'] = $request->sort;
+        } else {
+            $pets->latest('created_at');
+        }
+
+        // Buscadores
+        if ($request->has('query')  && $request->input('query') !== null) {
+            $pets->where('location', 'like', "%{$request->input('query')}%")
+                ->orWhere('description', 'like', "%{$request->input('query')}%");
+            $queries['query'] = $request->query;
+        }
+
+        return response($pets->paginate(6)->appends($queries));
     }
 
     /**
@@ -47,7 +72,7 @@ class PetController extends Controller
             $this->storeImages($request->images, $newPet->uid);
         }
 
-        return response($newPet);
+        return $this->createdResponse($newPet);
     }
 
     /**
@@ -56,7 +81,8 @@ class PetController extends Controller
      * @param Array $images
      * @param String $uid
     */
-    private function storeImages(Array $images, String $uid) {
+    private function storeImages(Array $images, String $uid)
+    {
 
         foreach ($images as $base64_image) {
             if (preg_match('/^data:image\/(\w+);base64,/', $base64_image)) {
@@ -80,7 +106,8 @@ class PetController extends Controller
      * @param String $filename
      * @param String $uid
     */
-    private function registerImage(String $filename, String $uid) {
+    private function registerImage(String $filename, String $uid)
+    {
         $image = new \App\ImagesPet();
         $image->uid = Str::uuid();
         $image->pet_uid = $uid;
@@ -95,7 +122,12 @@ class PetController extends Controller
      * @param  String  $uid
      * @return \Illuminate\Http\Response
      */
-    public function show(Pet $pet) {
+    public function show($uid)
+    {
+        $pet = Pet::with('user')->find($uid);
+
+        $pet->user->makeHidden('api_token');
+
         return $this->successResponse($pet);
     }
 

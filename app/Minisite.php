@@ -20,7 +20,7 @@ class Minisite extends Model
         'name',
         'description',
         'phone',
-        'city',
+        'location',
         'address',
         'latitude',
         'longitude',

@@ -13,19 +13,20 @@ class Pet extends Model
 
     protected $hidden = [
         'created_at',
-        'updated_at'
+        'updated_at',
+        'pivot'
     ];
 
     protected $fillable = [
         'process_id',
         'name',
         'phone',
-        'months',
+        'age',
         'sterilized',
         'vaccinated',
-        'sex',
+        'gender',
         'description',
-        'city',
+        'location',
         'longitude',
         'latitude',
     ];
@@ -51,7 +52,7 @@ class Pet extends Model
      *
      * @return boolean
      */
-    public function getisFavoriteAttribute()
+    public function getIsFavoriteAttribute()
     {
         if (auth()->check()) {
             return (bool) Favorite::where('user_uid', auth()->user()->uid)
@@ -60,5 +61,10 @@ class Pet extends Model
         }
 
         return false;
+    }
+
+    public function scopeApproved($query)
+    {
+        return $query->whereNotNull('approved_at');
     }
 }

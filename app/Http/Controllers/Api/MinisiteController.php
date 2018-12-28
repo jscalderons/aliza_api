@@ -12,7 +12,7 @@ class MinisiteController extends Controller
 {
     use RestControllerTrait;
 
-    private $storagePath = '/images/sites';
+    private $storagePath = 'sites';
 
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class MinisiteController extends Controller
      */
     public function index()
     {
-        $minisites = Minisite::orderBy('created_at', 'ASC')
+        $minisites = Minisite::latest('created_at')
                                 ->with('category')
                                 ->with('user')
                                 ->paginate(6);
@@ -50,7 +50,7 @@ class MinisiteController extends Controller
             $newSite->update();
         }
 
-        return $this->successResponse($newSite);
+        return $this->createdResponse();
     }
 
     public function visit() {

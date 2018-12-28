@@ -23,6 +23,19 @@ class UserController extends Controller
         return $this->successResponse($myPets);
     }
 
+    public function mySites() {
+        $mySites = Auth::user()->sites;
+
+        return $this->successResponse($mySites);
+    }
+
+    public function myPosts()
+    {
+        $myPosts = Auth::user()->posts;
+
+        return $this->successResponse($myPosts);
+    }
+
     /**
      * Favorite a particular post
      *

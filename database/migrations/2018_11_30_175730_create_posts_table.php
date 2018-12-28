@@ -18,9 +18,10 @@ class CreatePostsTable extends Migration
             $table->uuid('user_uid');
             $table->string('image')->nullable();
             $table->string('title');
-            $table->string('content');
+            $table->text('body');
             $table->integer('views')->default(0);
             $table->integer('likes')->default(0);
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }

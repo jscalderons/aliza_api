@@ -21,7 +21,7 @@ class CreateMinisitesTable extends Migration
             $table->string('image', 14)->nullable();
             $table->string('description')->nullable();
             $table->string('phone', 20);
-            $table->string('city')->nullable();
+            $table->string('location')->nullable();
             $table->string('address', 100)->nullable();
             $table->string('latitude')->default(0);
             $table->string('longitude')->default(0);

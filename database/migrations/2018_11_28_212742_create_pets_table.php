@@ -19,14 +19,15 @@ class CreatePetsTable extends Migration
             $table->integer('process_id')->unsigned();
             $table->string('name', 40)->nullable();
             $table->string('phone', 20)->nullable();
-            $table->smallInteger('months')->nullable();
+            $table->smallInteger('age')->nullable();
             $table->boolean('sterilized')->default(false);
             $table->boolean('vaccinated')->default(false);
-            $table->string('sex', 1);
+            $table->string('gender', 1);
             $table->string('description')->nullable();
-            $table->string('city');
+            $table->string('location');
             $table->decimal('longitude', 9, 6)->default(0);
             $table->decimal('latitude', 9, 6)->default(0);
+            $table->timestamp('approved_at')->nullable();
             $table->timestamps();
         });
     }
