@@ -6,7 +6,6 @@ use \App\Pet;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Traits\RestControllerTrait;
 use App\Http\Traits\RestControllerTrait as RESTTrait;
 use App\Http\Traits\ImagesControllerTrait as ImagesTrait;
 
@@ -61,11 +60,11 @@ class PetController extends Controller
      * @param  \Illuminate\Http\StorePetRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePetRequest $request)
+    public function store(Request $request)
     {
         $newPet = new Pet($request->all());
         $newPet->uid = Str::uuid();
-        $newPet->user_uid = $request->user()->uid;
+        $newPet->user_uid = auth()->user()->uid;
 
         if ($newPet->save()) {
             $this->storeImages($request->images, $newPet->uid);

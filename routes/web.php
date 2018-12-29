@@ -17,8 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->group(function() {
+    Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+    // ================== pets ================== //
+    // [POST]
+    Route::post('/pet/{uid}/approve', 'Admin\PetController@approve')->name('pet.approve');
+});
