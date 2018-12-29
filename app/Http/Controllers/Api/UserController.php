@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Traits\RestControllerTrait;
 
 class UserController extends Controller
@@ -12,26 +11,26 @@ class UserController extends Controller
     use RestControllerTrait;
 
     public function myFavorites() {
-        $myFavorites = Auth::user()->favorites;
+        $myFavorites = auth()->user()->favorites;
 
         return $this->successResponse($myFavorites);
     }
 
     public function myPets() {
-        $myPets = Auth::user()->pets;
+        $myPets = auth()->user()->pets;
 
         return $this->successResponse($myPets);
     }
 
     public function mySites() {
-        $mySites = Auth::user()->sites;
+        $mySites = auth()->user()->sites;
 
         return $this->successResponse($mySites);
     }
 
     public function myPosts()
     {
-        $myPosts = Auth::user()->posts;
+        $myPosts = auth()->user()->posts;
 
         return $this->successResponse($myPosts);
     }
@@ -44,7 +43,7 @@ class UserController extends Controller
      */
     public function favoritePet(\App\Pet $pet)
     {
-        Auth::user()->favorites()->attach($pet->uid);
+        auth()->user()->favorites()->attach($pet->uid);
 
         return $this->createdResponse();
     }
@@ -57,7 +56,7 @@ class UserController extends Controller
      */
     public function unFavoritePet(\App\Pet $pet)
     {
-        Auth::user()->favorites()->detach($pet->uid);
+        auth()->user()->favorites()->detach($pet->uid);
 
         return $this->deletedResponse();
     }

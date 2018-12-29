@@ -6,13 +6,14 @@ use \App\Minisite;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Traits\RestControllerTrait;
+use App\Http\Traits\RestControllerTrait as RESTTrait;
+use App\Http\Traits\ImagesControllerTrait as ImagesTrait;
 
 class MinisiteController extends Controller
 {
-    use RestControllerTrait;
+    use RESTTrait, ImagesTrait;
 
-    private $storagePath = 'sites';
+    private $storageFolder = 'sites';
 
     /**
      * Display a listing of the resource.
@@ -21,12 +22,14 @@ class MinisiteController extends Controller
      */
     public function index()
     {
-        $minisites = Minisite::latest('created_at')
-                                ->with('category')
-                                ->with('user')
-                                ->paginate(6);
+        $sites = Minisite::latest('created_at')
+                                ->with('user');
 
-        return response()->json($minisites);
+        foreach ($sites as $$site) {
+            $site->user->makeHidden('api_token');
+        }
+
+        return response($sites->paginate(6));
     }
 
     /**
@@ -37,35 +40,21 @@ class MinisiteController extends Controller
      */
     public function store(Request $request)
     {
-        $newSite = new Minisite($request->all());
+        $site = new Minisite($request->all());
+        $site->uid = Str::uuid();
+        $site->user_uid = auth()->user()->uid;
 
-        $newSite->uid = Str::uuid();
-        $newSite->user_uid = $request->user()->uid;
+        if ($site->save())
+        {
+            if ($filename = $this->storeImage($request->image, $site->uid)) {
+                $site->image = $filename;
+                $site->update();
+            }
 
-        if ($newSite->save()) {
-            $filename = $this->uploadBase64Image($request->image, $newSite->uid, $this->storagePath);
-
-            $newSite->image = $filename;
-
-            $newSite->update();
+            return $this->createdResponse();
         }
 
-        return $this->createdResponse();
-    }
-
-    public function visit() {
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return $this->errorResponse('El sitio no pudo ser guardado.');
     }
 
     /**
@@ -75,19 +64,58 @@ class MinisiteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $uid)
     {
-        //
+        $site = Minisite::find($uid);
+
+        if ($site->update($request->all()))
+        {
+            if ($request->has('image'))
+            {
+                if ($filename = $this->storeImage($request->image, $site->uid))
+                {
+                    if ($this->destroyImage($uid, $site->image))
+                    {
+                        $site->image = $filename;
+                        $site->update();
+                    }
+                }
+            }
+
+            return $this->successResponse($site);
+        }
+
+        return $this->errorResponse('El sitio no pudo ser guardado.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * decodifica de base64 y almacena imagenes
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+     * @param Array $images
+     * @param String $uid
+     * @return String
+     * @return Null
+    */
+    private function storeImage(String $base64Images, String $uid)
     {
-        //
+        $image = $this->base64ImageDecoder($base64Images);
+
+        if ($image)
+        {
+            $path = "{$this->storageFolder}/{$uid}";
+            $filename = $this->generateFilename();
+
+            return $this->uploadImage($image, $path, $filename) ? $filename : null;
+        }
+
+        return null;
     }
+
+    public function destroyImage(String $uid, String $filename)
+    {
+        $path = "{$this->storageFolder}/{$uid}";
+
+        return $this->deleteImage($path, $filename);
+    }
+
 }

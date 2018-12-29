@@ -26,6 +26,10 @@ class Minisite extends Model
         'longitude',
     ];
 
+    protected $with = [
+        'category'
+    ];
+
     public function category() {
         return $this->hasOne('App\Category', 'id', 'category_id');
     }

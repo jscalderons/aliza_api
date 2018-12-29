@@ -6,15 +6,15 @@ use \App\Pet;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Traits\RestControllerTrait;
-use App\Http\Requests\Pets\StorePetRequest;
+use App\Http\Traits\RestControllerTrait as RESTTrait;
+use App\Http\Traits\ImagesControllerTrait as ImagesTrait;
 
 class PetController extends Controller
 {
-    use RestControllerTrait;
+    use RESTTrait, ImagesTrait;
 
-    private $storagePath = '/images/pets';
+    private $storageFolder = 'pets';
 
     /**
      * Retorna una lista de mascotas.
@@ -67,7 +67,6 @@ class PetController extends Controller
         $newPet->uid = Str::uuid();
         $newPet->user_uid = $request->user()->uid;
 
-
         if ($newPet->save()) {
             $this->storeImages($request->images, $newPet->uid);
         }
@@ -75,45 +74,7 @@ class PetController extends Controller
         return $this->createdResponse($newPet);
     }
 
-    /**
-     * Convierte y almacena una o varias imagenes en base64 a la ruta publica del store
-     *
-     * @param Array $images
-     * @param String $uid
-    */
-    private function storeImages(Array $images, String $uid)
-    {
 
-        foreach ($images as $base64_image) {
-            if (preg_match('/^data:image\/(\w+);base64,/', $base64_image)) {
-                $data = substr($base64_image, strpos($base64_image, ',') + 1);
-                $data = base64_decode($data);
-
-                $filename = str_random(10) . ".jpg";
-
-                $stored = Storage::disk('public')->put("{$this->storagePath}/{$uid}/{$filename}", $data);
-
-                if ($stored) {
-                    $this->registerImage($filename, $uid);
-                }
-            }
-        }
-    }
-
-    /**
-     * Registra una imagen subida al servidor a la base de datos
-     *
-     * @param String $filename
-     * @param String $uid
-    */
-    private function registerImage(String $filename, String $uid)
-    {
-        $image = new \App\ImagesPet();
-        $image->uid = Str::uuid();
-        $image->pet_uid = $uid;
-        $image->filename = $filename;
-        $image->save();
-    }
 
     /**
      * Display the specified resource.
@@ -138,19 +99,95 @@ class PetController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $uid)
     {
-        //
+        $pet = Pet::find($uid);
+
+        if ($pet->update($request->all())) {
+            if ($request->has('images')) {
+                $this->storeImages($request->images, $pet->uid);
+            }
+
+            return $this->successResponse($pet);
+        }
+
+        return $this->errorResponse('No se pudo actualizar el registro.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * decodifica y almacena un arreglo en base64 a imagenes
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+     * @param Array $images
+     * @param String $uid
+    */
+    private function storeImages(Array $base64Images, String $uid)
     {
-        //
+        foreach ($base64Images as $base64)
+        {
+            $image = $this->base64ImageDecoder($base64);
+
+            if ($image)
+            {
+                $path = "{$this->storageFolder}/{$uid}";
+                $filename = $this->generateFilename();
+
+                if ($this->uploadImage($image, $path, $filename))
+                {
+                    $this->registerImage($filename, $uid);
+                }
+            }
+        }
     }
+
+    /**
+     * Registra una imagen subida al servidor a la base de datos
+     *
+     * @param String $filename
+     * @param String $uid
+    */
+    private function registerImage(String $filename, String $uid)
+    {
+        $image = new \App\ImagesPet();
+        $image->uid = Str::uuid();
+        $image->pet_uid = $uid;
+        $image->filename = $filename;
+        $image->save();
+    }
+
+    public function destroyImage(String $uid, String $filename)
+    {
+        $path = "{$this->storageFolder}/{$uid}";
+
+        if ($this->unregisterImage($uid, $filename))
+        {
+            if ($this->deleteImage($path, $filename))
+            {
+                return $this->deletedResponse();
+            }
+        } else
+        {
+            return $this->errorResponse('Debes tener almenos una imagen.');
+        }
+
+        return $this->notFoundResponse();
+    }
+
+     /**
+     *  Elimina una imagen del usuario
+     *
+     * @param String $uid
+     * @param String $filename
+     * @return Boolean
+     */
+    private function unregisterImage(String $uid, String $filename)
+    {
+        $images = \App\ImagesPet::where('pet_uid', $uid);
+
+        if ($images->count() > 1) {
+            return $images->where('filename', $filename)->delete();
+        }
+
+        return false;
+    }
+
 }

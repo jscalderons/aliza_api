@@ -20,22 +20,8 @@
 Route::namespace('Api')->group(function() {
 
     // ================== access ================== //
-    Route::post('/auth', 'Auth\AccessController@auth');
-
-    // ================== pets ================== //
-        // [GET]
-        Route::middleware('auth:api')->get('/pet/{uid}', 'PetController@show'); // Obtener todas las mascotas del usuario
-
         // [POST]
-        Route::middleware('auth:api')->post('/pet/create', 'PetController@store'); // nueva mascotas
-        Route::post('/pets', 'PetController@index'); // Obtener todas las mascotas
-
-    // ================== minisites ================== //
-        // [GET]
-        Route::get('/sites', 'MinisiteController@index');
-
-        // [POST]
-        Route::middleware('auth:api')->post('/site/create', 'MinisiteController@store');
+        Route::post('/auth', 'Auth\AccessController@auth');
 
     // ================== Listas ================== //
         // [GET]
@@ -55,10 +41,42 @@ Route::namespace('Api')->group(function() {
         // [PUT]
         Route::middleware('auth:api')->put('/unfavorite/{pet}', 'UserController@unFavoritePet'); // eliminar favorito
 
+    // ================== pets ================== //
+        // [GET]
+        Route::middleware('auth:api')->get('/pet/{uid}', 'PetController@show'); // Obtener todas las mascotas del usuario
+
+        // [POST]
+        Route::post('/pets', 'PetController@index'); // Obtener todas las mascotas
+        Route::middleware('auth:api')->post('/pet', 'PetController@store'); // nueva mascotas
+
+        // [PUT]
+        Route::middleware('auth:api')->put('/pet/{uid}', 'PetController@update'); // editar mascotas
+
+        // [DELETE]
+        Route::middleware('auth:api')->delete('pet/{uid}/image/{filename}', 'PetController@destroyImage'); // Eliminar imagenes
+
+
+    // ================== minisites ================== //
+        // [GET]
+        Route::get('/sites', 'MinisiteController@index');
+
+        // [POST]
+        Route::middleware('auth:api')->post('/site', 'MinisiteController@store');
+
+        // [PUT]
+        Route::middleware('auth:api')->put('/site/{uid}', 'MinisiteController@update');
+
     // ================== Posts ================== //
         // [GET]
         Route::get('/posts', 'PostController@index'); // Obtener todos las publicaciones
 
         // [POST]
-        Route::middleware('auth:api')->post('/post/create', 'PostController@store'); // Registrar una nueva publicacion
+        Route::middleware('auth:api')->post('/post', 'PostController@store'); // Registrar una nueva publicacion
+
+        // [PUT]
+        Route::middleware('auth:api')->put('/post/{uid}', 'PostController@update');
+
+    // ================== Test ================== //
+        // Route::post('/test', 'PetController@upload'); // Registrar una nueva publicacion
+
 });

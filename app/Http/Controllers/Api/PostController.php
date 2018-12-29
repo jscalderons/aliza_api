@@ -6,13 +6,14 @@ use \App\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Traits\RestControllerTrait;
+use App\Http\Traits\RestControllerTrait as RESTTrait;
+use App\Http\Traits\ImagesControllerTrait as ImagesTrait;
 
 class PostController extends Controller
 {
-    use RestControllerTrait;
+    use RESTTrait, ImagesTrait;
 
-    private $storagePath = 'posts';
+    private $storageFolder = 'posts';
 
 
     public function index()
@@ -24,17 +25,74 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $newPost = new Post($request->all());
-        $newPost->uid = Str::uuid();
-        $newPost->user_uid = auth()->user()->uid;
+        $post = new Post($request->all());
+        $post->uid = Str::uuid();
+        $post->user_uid = auth()->user()->uid;
 
-        if ($newPost->saveOrFail()) {
-            $newPost->image = $this->uploadBase64Image($request->image, $newPost->uid, $this->storagePath);
+        if ($post->save())
+        {
+            if ($filename = $this->storeImage($request->image, $post->uid))
+            {
+                $post->image = $filename;
+                $post->update();
+            }
 
-            $newPost->update();
             return $this->createdResponse();
         }
 
-        return $this->errorResponse();
+        return $this->errorResponse('No se guardo el registro');
+    }
+
+    public function update(Request $request, $uid)
+    {
+        $post = Post::find($uid);
+
+        if ($post->update($request->all()))
+        {
+            if ($request->has('image'))
+            {
+                if ($filename = $this->storeImage($request->image, $post->uid))
+                {
+                    if ($this->destroyImage($uid, $post->image)) {
+                        $post->image = $filename;
+                        $post->update();
+                    }
+                }
+            }
+
+            return $this->successResponse($post);
+        }
+
+        return $this->errorResponse('No se guardo el registro');
+    }
+
+    /**
+     * decodifica de base64 y almacena imagenes
+     *
+     * @param Array $images
+     * @param String $uid
+     * @return String
+     * @return Null
+    */
+    private function storeImage(String $base64Images, String $uid)
+    {
+        $image = $this->base64ImageDecoder($base64Images);
+
+        if ($image)
+        {
+            $path = "{$this->storageFolder}/{$uid}";
+            $filename = $this->generateFilename();
+
+            return $this->uploadImage($image, $path, $filename) ? $filename : null;
+        }
+
+        return null;
+    }
+
+    public function destroyImage(String $uid, String $filename)
+    {
+        $path = "{$this->storageFolder}/{$uid}";
+
+        return $this->deleteImage($path, $filename);
     }
 }

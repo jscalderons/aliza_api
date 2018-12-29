@@ -3,7 +3,6 @@
 namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 trait RestControllerTrait {
 
@@ -78,22 +77,6 @@ trait RestControllerTrait {
 	// 	return $this->deletedResponse();
     // }
 
-    /**
-     * Convierte y sube una imagen en base64
-     */
-    protected function uploadBase64Image(String $base64_image, String $uid, String $path, String $disk = 'public') {
-        $filename = str_random(10) . ".jpg";
-
-        if (preg_match('/^data:image\/(\w+);base64,/', $base64_image)) {
-            $data = substr($base64_image, strpos($base64_image, ',') + 1);
-            $data = base64_decode($data);
-
-            Storage::disk($disk)->put("images/{$path}/{$uid}/{$filename}", $data);
-        }
-
-        return $filename;
-    }
-
 	protected function successResponse($data) {
 
 		$response = [
@@ -135,12 +118,11 @@ trait RestControllerTrait {
     }
 
 
-	public function errorResponse($data, $message = null) {
+	public function errorResponse($message = null) {
 
 		$response = [
 			'code' => 422,
 			'status' => 'error',
-			'data' => $data,
 			'message' => $message ?? 'Unprocessable Entity'
 		];
 		return response()->json($response, $response['code']);
