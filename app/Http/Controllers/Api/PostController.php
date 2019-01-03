@@ -18,9 +18,9 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::latest('created_at')->paginate(6);
+        $posts = Post::latest('created_at');
 
-        return response($posts);
+        return response($posts->paginate(env('PAGINATE', 6)));
     }
 
     public function store(Request $request)

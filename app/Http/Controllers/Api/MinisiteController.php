@@ -43,7 +43,10 @@ class MinisiteController extends Controller
         }
 
         // Posicionamiento
-        if ($request->has('latitude') && $request->has('longitude'))
+        if ($request->has('latitude')
+            && $request->latitude !== null
+            && $request->has('longitude')
+            && $request->longitude !== null)
         {
             $sites->sortByCoordinates($request->latitude, $request->longitude);
             $queries['latitude'] = $request->latitude;
@@ -56,7 +59,10 @@ class MinisiteController extends Controller
             $sites->orderBy('created_at', $request->sort);
             $queries['sort'] = $request->sort;
         }
-        else if ($request->has('latitude') && $request->has('longitude'))
+        else if ($request->has('latitude')
+            && $request->latitude !== null
+            && $request->has('longitude')
+            && $request->longitude !== null)
         {
             $sites->orderBy('distance', 'ASC');
         }
@@ -65,7 +71,7 @@ class MinisiteController extends Controller
             $sites->latest('created_at');
         }
 
-        return response($sites->paginate(6)->appends($queries));
+        return response($sites->paginate(env('PAGINATE', 6))->appends($queries));
     }
 
     /**

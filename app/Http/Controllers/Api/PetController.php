@@ -43,7 +43,10 @@ class PetController extends Controller
         }
 
         // Posicionamiento
-        if ($request->has('latitude') && $request->has('longitude')) {
+        if ($request->has('latitude')
+            && $request->latitude !== null
+            && $request->has('longitude')
+            && $request->longitude !== null) {
             $pets->sortByCoordinates($request->latitude, $request->longitude);
             $queries['latitude'] = $request->latitude;
             $queries['longitude'] = $request->longitude;
@@ -53,13 +56,16 @@ class PetController extends Controller
         if ($request->has('sort') && $request->sort !== null) {
             $pets->orderBy('created_at', $request->sort);
             $queries['sort'] = $request->sort;
-        } else if ($request->has('latitude') && $request->has('longitude')) {
+        } else if ($request->has('latitude')
+            && $request->latitude !== null
+            && $request->has('longitude')
+            && $request->longitude !== null) {
             $pets->orderBy('distance', 'ASC');
         } else {
             $pets->latest('created_at');
         }
 
-        return response($pets->paginate(6)->appends($queries));
+        return response($pets->paginate(env('PAGINATE', 6))->appends($queries));
     }
 
     /**
