@@ -28,7 +28,8 @@ class MinisiteController extends Controller
         // Filtrar
         if ($request->has('filters'))
         {
-            if (array_has($request->filters, 'category_id'))
+            if (array_has($request->filters, 'category_id')
+                && $request->filters['category_id'] !== null)
             {
                 $sites->where('category_id', $request->filters['category_id']);
                 $queries['category_id'] = $request->filters['category_id'];
