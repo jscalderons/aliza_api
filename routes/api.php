@@ -57,10 +57,8 @@ Route::namespace('Api')->group(function() {
 
 
     // ================== minisites ================== //
-        // [GET]
-        Route::get('/sites', 'MinisiteController@index');
-
         // [POST]
+        Route::post('/sites', 'MinisiteController@index');
         Route::middleware('auth:api')->post('/site', 'MinisiteController@store');
 
         // [PUT]

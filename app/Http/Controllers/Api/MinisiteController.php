@@ -20,16 +20,52 @@ class MinisiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $sites = Minisite::latest('created_at')
-                                ->with('user');
+        $sites = Minisite::with('user');
+        $queries = [];
 
-        foreach ($sites as $$site) {
-            $site->user->makeHidden('api_token');
+        // Filtrar
+        if ($request->has('filters'))
+        {
+            if (array_has($request->filters, 'category_id'))
+            {
+                $sites->where('category_id', $request->filters['category_id']);
+                $queries['category_id'] = $request->filters['category_id'];
+            }
         }
 
-        return response($sites->paginate(6));
+        // Buscador
+        if ($request->has('query') && $request->input('query') !== null)
+        {
+            $sites->search($request->input('query'));
+            $queries['query'] = $request->input('query');
+        }
+
+        // Posicionamiento
+        if ($request->has('latitude') && $request->has('longitude'))
+        {
+            $sites->sortByCoordinates($request->latitude, $request->longitude);
+            $queries['latitude'] = $request->latitude;
+            $queries['longitude'] = $request->longitude;
+        }
+
+        // Ordenamiento
+        if ($request->has('sort') && $request->sort !== null)
+        {
+            $sites->orderBy('created_at', $request->sort);
+            $queries['sort'] = $request->sort;
+        }
+        else if ($request->has('latitude') && $request->has('longitude'))
+        {
+            $sites->orderBy('distance', 'ASC');
+        }
+        else
+        {
+            $sites->latest('created_at');
+        }
+
+        return response($sites->paginate(6)->appends($queries));
     }
 
     /**
@@ -46,7 +82,8 @@ class MinisiteController extends Controller
 
         if ($site->save())
         {
-            if ($filename = $this->storeImage($request->image, $site->uid)) {
+            if ($filename = $this->storeImage($request->image, $site->uid))
+            {
                 $site->image = $filename;
                 $site->update();
             }

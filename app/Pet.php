@@ -67,4 +67,24 @@ class Pet extends Model
     {
         return $query->whereNotNull('approved_at');
     }
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('name', 'like', "%{$search}%")
+                ->orWhere('location', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
+    }
+
+    public function scopeSortByCoordinates($query, $latitude, $longitude)
+    {
+        $sorfQuery = "(((acos(sin(({$latitude} * pi() / 180))
+                        * sin((Latitude * pi() / 180))
+                        + cos(({$latitude} * pi() / 180))
+                        * cos((Latitude * pi() / 180))
+                        * cos((({$longitude} - Longitude) * pi() / 180)))) * 180 / pi())
+                        * 60 * 1.1515 * 1.609344)";
+
+        return $query->select()
+                    ->selectRaw("{$sorfQuery} AS distance");
+    }
 }

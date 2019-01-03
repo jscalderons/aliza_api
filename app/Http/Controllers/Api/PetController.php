@@ -36,19 +36,27 @@ class PetController extends Controller
             }
         }
 
+        // Buscador
+        if ($request->has('query')  && $request->input('query') !== null) {
+            $pets->search($request->input('query'));
+            $queries['query'] = $request->query;
+        }
+
+        // Posicionamiento
+        if ($request->has('latitude') && $request->has('longitude')) {
+            $pets->sortByCoordinates($request->latitude, $request->longitude);
+            $queries['latitude'] = $request->latitude;
+            $queries['longitude'] = $request->longitude;
+        }
+
         // Ordenamiento
         if ($request->has('sort') && $request->sort !== null) {
             $pets->orderBy('created_at', $request->sort);
             $queries['sort'] = $request->sort;
+        } else if ($request->has('latitude') && $request->has('longitude')) {
+            $pets->orderBy('distance', 'ASC');
         } else {
             $pets->latest('created_at');
-        }
-
-        // Buscadores
-        if ($request->has('query')  && $request->input('query') !== null) {
-            $pets->where('location', 'like', "%{$request->input('query')}%")
-                ->orWhere('description', 'like', "%{$request->input('query')}%");
-            $queries['query'] = $request->query;
         }
 
         return response($pets->paginate(6)->appends($queries));
