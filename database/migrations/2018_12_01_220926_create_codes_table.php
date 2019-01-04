@@ -14,7 +14,7 @@ class CreateCodesTable extends Migration
     public function up()
     {
         Schema::create('codes', function (Blueprint $table) {
-            $table->uuid('Uid');
+            $table->uuid('Uid')->primary();
             $table->uuid('minisite_uid');
             $table->string('description');
             $table->integer('quantity');

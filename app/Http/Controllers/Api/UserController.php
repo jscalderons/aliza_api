@@ -10,29 +10,31 @@ class UserController extends Controller
 {
     use RestControllerTrait;
 
-    public function myFavorites() {
-        $myFavorites = auth()->user()->favorites;
+    public function myFavorites()
+    {
+        $myFavorites = auth()->user()->favorites()->paginate(env('PAGINATE', 6));
 
-        return $this->successResponse($myFavorites);
+        return response($myFavorites);
     }
 
-    public function myPets() {
-        $myPets = auth()->user()->pets;
+    public function myPets()
+    {
+        $myPets = auth()->user()->pets()->paginate(env('PAGINATE', 6));
 
-        return $this->successResponse($myPets);
+        return response($myPets);
     }
 
     public function mySites() {
-        $mySites = auth()->user()->sites;
+        $mySites = auth()->user()->sites()->paginate(env('PAGINATE', 6));
 
-        return $this->successResponse($mySites);
+        return response($mySites);
     }
 
     public function myPosts()
     {
-        $myPosts = auth()->user()->posts;
+        $myPosts = auth()->user()->posts()->paginate(env('PAGINATE', 6));
 
-        return $this->successResponse($myPosts);
+        return response($myPosts);
     }
 
     /**

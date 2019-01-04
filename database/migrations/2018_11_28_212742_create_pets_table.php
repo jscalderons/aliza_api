@@ -14,7 +14,7 @@ class CreatePetsTable extends Migration
     public function up()
     {
         Schema::create('pets', function (Blueprint $table) {
-            $table->uuid('uid');
+            $table->uuid('uid')->primary();
             $table->uuid('user_uid');
             $table->integer('process_id')->unsigned();
             $table->string('name', 40)->nullable();

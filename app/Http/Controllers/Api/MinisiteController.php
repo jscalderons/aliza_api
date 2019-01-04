@@ -26,13 +26,12 @@ class MinisiteController extends Controller
         $queries = [];
 
         // Filtrar
-        if ($request->has('filters'))
-        {
-            if (array_has($request->filters, 'category_id')
-                && $request->filters['category_id'] !== null)
-            {
-                $sites->where('category_id', $request->filters['category_id']);
-                $queries['category_id'] = $request->filters['category_id'];
+        if ($request->has('filters')) {
+            foreach ($request->filters as $key => $value) {
+                if ($value !== null) {
+                    $pets->where($key, $value);
+                    $queries[$key] = $value;
+                }
             }
         }
 
