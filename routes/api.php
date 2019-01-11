@@ -46,7 +46,7 @@ Route::namespace('Api')->group(function() {
         Route::middleware('auth:api')->get('/pet/{uid}', 'PetController@show'); // Obtener todas las mascotas del usuario
 
         // [POST]
-        Route::get('/pets', 'PetController@index'); // Obtener todas las mascotas
+        Route::post('/pets', 'PetController@index'); // Obtener todas las mascotas
         Route::middleware('auth:api')->post('/pet', 'PetController@store'); // nueva mascotas
 
         // [PUT]
@@ -54,6 +54,7 @@ Route::namespace('Api')->group(function() {
 
         // [DELETE]
         Route::middleware('auth:api')->delete('pet/{uid}/image/{filename}', 'PetController@destroyImage'); // Eliminar imagenes
+        Route::middleware('auth:api')->delete('pet/{uid}', 'PetController@destroy'); // Eliminar imagenes
 
 
     // ================== minisites ================== //

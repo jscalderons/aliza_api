@@ -120,6 +120,19 @@ class PetController extends Controller
         return $this->errorResponse('No se pudo actualizar el registro.');
     }
 
+    public function destroy($uid)
+    {
+        $pet = Pet::where('uid', $uid)
+                    ->where('user_uid', auth()->user()->uid);
+
+        if ($pet->count()) {
+            $pet->delete();
+            return $this->deletedResponse();
+        }
+
+        return $this->notFoundResponse();
+    }
+
     /**
      * decodifica y almacena un arreglo en base64 a imagenes
      *

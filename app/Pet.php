@@ -4,12 +4,17 @@ namespace App;
 
 use \App\Favorite;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pet extends Model
 {
+    use SoftDeletes;
+
     public $incrementing = false;
 
     protected $primaryKey = 'uid';
+
+    protected $dates = ['deleted_at'];
 
     protected $hidden = [
         'created_at',
@@ -31,13 +36,9 @@ class Pet extends Model
         'latitude',
     ];
 
-    protected $with = [
-        'images'
-    ];
+    protected $with = ['images'];
 
-    protected $appends = [
-        'isFavorite'
-    ];
+    protected $appends = ['isFavorite'];
 
     public function images() {
         return $this->hasMany('App\ImagesPet', 'pet_uid', 'uid');
@@ -47,11 +48,6 @@ class Pet extends Model
         return $this->hasOne('App\User', 'uid', 'user_uid');
     }
 
-    /**
-     * Determine whether a post has been marked as favorite by a user.
-     *
-     * @return boolean
-     */
     public function getIsFavoriteAttribute()
     {
         if (auth()->check()) {
