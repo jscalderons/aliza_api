@@ -18,54 +18,47 @@ class PetController extends Controller
     /**
      * Retorna una lista de mascotas.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $pets = Pet::approved();
-        $queries = [];
 
         // Filtros
-        if ($request->has('filters')) {
-            foreach ($request->filters as $key => $value) {
+        if (request()->has('filters')) {
+            foreach (request()->filters as $key => $value) {
                 if ($value !== null) {
                     $pets->where($key, $value);
-                    $queries[$key] = $value;
                 }
             }
         }
 
         // Buscador
-        if ($request->has('query')  && $request->input('query') !== null) {
-            $pets->search($request->input('query'));
-            $queries['query'] = $request->query;
+        if (request()->has('query')  && request()->input('query') !== null) {
+            $pets->search(request()->input('query'));
         }
 
         // Posicionamiento
-        if ($request->has('latitude')
-            && $request->latitude !== null
-            && $request->has('longitude')
-            && $request->longitude !== null) {
-            $pets->sortByCoordinates($request->latitude, $request->longitude);
-            $queries['latitude'] = $request->latitude;
-            $queries['longitude'] = $request->longitude;
+        if (request()->has('latitude')
+            && request()->latitude !== null
+            && request()->has('longitude')
+            && request()->longitude !== null) {
+            $pets->sortByCoordinates(request()->latitude, request()->longitude);
         }
 
         // Ordenamiento
-        if ($request->has('sort') && $request->sort !== null) {
-            $pets->orderBy('created_at', $request->sort);
-            $queries['sort'] = $request->sort;
-        } else if ($request->has('latitude')
-            && $request->latitude !== null
-            && $request->has('longitude')
-            && $request->longitude !== null) {
+        if (request()->has('sort') && request()->sort !== null) {
+            $pets->orderBy('created_at', request()->sort);
+        } else if (request()->has('latitude')
+            && request()->latitude !== null
+            && request()->has('longitude')
+            && request()->longitude !== null) {
             $pets->orderBy('distance', 'ASC');
         } else {
             $pets->latest('created_at');
         }
 
-        return response($pets->paginate(env('PAGINATE', 6))->appends($queries));
+        return response($pets->paginate(env('PAGINATE', 6))->appends(request()->query()));
     }
 
     /**

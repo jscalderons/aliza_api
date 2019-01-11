@@ -13,14 +13,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $admin = new User();
-        $admin->uid = Str::uuid();
-        $admin->name = 'admin';
-        $admin->email = 'admin@aliza.com';
-        $admin->password = Hash::make('Aliza2019');
-        $admin->remember_token = str_random(10);
-        $admin->image = "https://api.adorable.io/avatars/170/" . str_random(2);
-        $admin->api_token = str_random(60);
-        $admin->save();
+        User::create([
+            'uid' => '8b9f96d1-743b-462c-95da-87441126f426',
+            'name' => 'admin',
+            'email' => 'admin@aliza.com',
+            'password' => Hash::make('Aliza2019'),
+            'remember_token' => str_random(10),
+            'api_token' => str_random(60)
+        ]);
     }
 }

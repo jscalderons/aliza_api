@@ -18,11 +18,11 @@ class CreatePetsTable extends Migration
             $table->uuid('user_uid');
             $table->integer('process_id')->unsigned();
             $table->string('name', 40)->nullable();
-            $table->string('phone', 20)->nullable();
+            $table->tinyInteger('phone')->nullable();
             $table->smallInteger('age')->nullable();
             $table->boolean('sterilized')->default(false);
             $table->boolean('vaccinated')->default(false);
-            $table->string('gender', 1);
+            $table->char('gender', 1);
             $table->string('description')->nullable();
             $table->string('location');
             $table->decimal('longitude', 9, 6)->default(0);

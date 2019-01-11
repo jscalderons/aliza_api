@@ -1,9 +1,7 @@
 <?php
 
 use \App\Pet;
-use \App\Process;
-use \App\ImagesPet;
-use Illuminate\Support\Str;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class PetsTableSeeder extends Seeder
@@ -15,14 +13,35 @@ class PetsTableSeeder extends Seeder
      */
     public function run()
     {
-        // Procesos
-        $adoption = new Process();
-        $adoption->name = 'Adopción';
-        $adoption->save();
+        \App\Process::create([
+            'name' => 'Extraviado'
+        ]);
 
-        $lost = new Process();
-        $lost->name = 'Extraviado';
-        $lost->save();
+        \App\Process::create([
+            'name' => 'Adopción'
+        ]);
+
+        Pet::truncate();
+
+        factory(App\Pet::class, 50)->create();
+        // for ($i=1; $i < 101; $i++) {
+        //     Pet::create([
+        //         'uid' => Illuminate\Support\Str::uuid(),
+        //         'user_uid' => '8b9f96d1-743b-462c-95da-87441126f426',
+        //         'process_id' => rand(0, 1),
+        //         'name' => "mascota#{$i}",
+        //         'phone' => rand(1000000000, 9999999999),
+        //         'age' => rand(1, 100),
+        //         'sterilized' => rand(0, 1),
+        //         'vaccinated' => rand(0, 1),
+        //         'gender' => rand(0, 1) ? 'M' : 'F',
+        //         'description' => "Esta es la mascota#{$i}",
+        //         'location' => 'Cali',
+        //         'approved_at' => now(),
+        //         'created_at' => Carbon::now()->subDays(100)->addDays($i)
+        //     ]);
+        // }
+
 
         // Hunter
         // $hunter = new Pet();

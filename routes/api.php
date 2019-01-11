@@ -46,7 +46,7 @@ Route::namespace('Api')->group(function() {
         Route::middleware('auth:api')->get('/pet/{uid}', 'PetController@show'); // Obtener todas las mascotas del usuario
 
         // [POST]
-        Route::post('/pets', 'PetController@index'); // Obtener todas las mascotas
+        Route::get('/pets', 'PetController@index'); // Obtener todas las mascotas
         Route::middleware('auth:api')->post('/pet', 'PetController@store'); // nueva mascotas
 
         // [PUT]

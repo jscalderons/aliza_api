@@ -20,49 +20,43 @@ class MinisiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $sites = Minisite::with('user');
-        $queries = [];
 
         // Filtrar
-        if ($request->has('filters')) {
-            foreach ($request->filters as $key => $value) {
+        if (request()->has('filters')) {
+            foreach (request()->filters as $key => $value) {
                 if ($value !== null) {
                     $pets->where($key, $value);
-                    $queries[$key] = $value;
                 }
             }
         }
 
         // Buscador
-        if ($request->has('query') && $request->input('query') !== null)
+        if (request()->has('query') && request()->input('query') !== null)
         {
-            $sites->search($request->input('query'));
-            $queries['query'] = $request->input('query');
+            $sites->search(request()->input('query'));
         }
 
         // Posicionamiento
-        if ($request->has('latitude')
-            && $request->latitude !== null
-            && $request->has('longitude')
-            && $request->longitude !== null)
+        if (request()->has('latitude')
+            && request()->latitude !== null
+            && request()->has('longitude')
+            && request()->longitude !== null)
         {
-            $sites->sortByCoordinates($request->latitude, $request->longitude);
-            $queries['latitude'] = $request->latitude;
-            $queries['longitude'] = $request->longitude;
+            $sites->sortByCoordinates(request()->latitude, request()->longitude);
         }
 
         // Ordenamiento
-        if ($request->has('sort') && $request->sort !== null)
+        if (request()->has('sort') && request()->sort !== null)
         {
-            $sites->orderBy('created_at', $request->sort);
-            $queries['sort'] = $request->sort;
+            $sites->orderBy('created_at', request()->sort);
         }
-        else if ($request->has('latitude')
-            && $request->latitude !== null
-            && $request->has('longitude')
-            && $request->longitude !== null)
+        else if (request()->has('latitude')
+            && request()->latitude !== null
+            && request()->has('longitude')
+            && request()->longitude !== null)
         {
             $sites->orderBy('distance', 'ASC');
         }
@@ -71,7 +65,7 @@ class MinisiteController extends Controller
             $sites->latest('created_at');
         }
 
-        return response($sites->paginate(env('PAGINATE', 6))->appends($queries));
+        return response($sites->paginate(env('PAGINATE', 6))->appends(request()->query()));
     }
 
     /**
