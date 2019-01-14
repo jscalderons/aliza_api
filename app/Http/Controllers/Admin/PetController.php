@@ -9,11 +9,11 @@ use App\Http\Controllers\Controller;
 class PetController extends Controller
 {
 
-    public function list()
+    public function index()
     {
         $pets = \App\Pet::whereNull('approved_at')->get();
 
-        return view('admin.pets.list', compact('pets'));
+        return view('admin.pets.index', compact('pets'));
     }
 
     public function approve($uid)

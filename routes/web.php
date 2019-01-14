@@ -20,7 +20,17 @@ Auth::routes(['register' => false]);
 Route::middleware('auth')->group(function() {
     Route::get('/home', 'HomeController@index')->name('home');
 
-    // ================== pets ================== //
-    // [POST]
-    Route::post('/pet/{uid}/approve', 'Admin\PetController@approve')->name('pet.approve');
+    Route::namespace('Admin')->group(function() {
+        // ================== PETS ================== //
+        // [GET]
+        Route::get('pets', 'PetController@index')->name('pets');
+
+        // [POST]
+        Route::post('/pet/{uid}/approve', 'PetController@approve')->name('pet.approve');
+
+        // ================== POSTS ================== //
+        // [GET]
+        Route::get('posts', 'PostController@index')->name('posts');
+
+    });
 });

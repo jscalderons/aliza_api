@@ -29,7 +29,7 @@
         <div class="content">
             @include('components.navbar')
 
-            <main class="main">
+            <main class="container-fluid mt-4">
                 @yield('content')
             </main>
         </div>

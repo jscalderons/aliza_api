@@ -14,6 +14,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $pets = \App\Pet::whereNull('approved_at')->get();
+
+        return view('admin.home', compact('pets'));
     }
 }

@@ -10586,6 +10586,7 @@ a.text-dark:focus {
 }
 
 #sidebar ul li a {
+  text-decoration: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10629,6 +10630,11 @@ a.text-dark:focus {
     -webkit-transform: none;
             transform: none;
   }
+}
+
+.card .card-icon {
+  display: block;
+  float: right;
 }
 
 .vh-100 {
