@@ -1,0 +1,141 @@
+// btn
+.btn-navbar {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+#sidebarCollapse {
+    width: 40px;
+    height: 40px;
+    background: inherit;
+
+    span {
+        width: 80%;
+        height: 2px;
+        margin: 0 auto;
+        display: block;
+        background: #555;
+        transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
+        &:first-of-type {
+        /* rotate first one */
+            transform: rotate(45deg) translate(2px, 2px);
+        }
+        &:nth-of-type(2) {
+            /* second one is not visible */
+            opacity: 0;
+        }
+        &:last-of-type {
+            /* rotate third one */
+            transform: rotate(-45deg) translate(1px, -1px);
+        }
+    }
+    &.active span {
+        /* no rotation */
+        transform: none;
+        /* all bars are visible */
+        opacity: 1;
+        margin: 5px auto;
+    }
+
+    @media #{$break-md} {
+        span:first-of-type,
+        span:nth-of-type(2),
+        span:last-of-type {
+            transform: none;
+            opacity: 1;
+            margin: 5px auto;
+        }
+
+        /* Removing the vertical margin and make the first and last bars rotate again when the sidebar is open, hiding the second bar */
+        &.active span {
+            margin: 0 auto;
+        }
+        &.active span:first-of-type {
+            transform: rotate(45deg) translate(2px, 2px);
+        }
+        &.active span:nth-of-type(2) {
+            opacity: 0;
+        }
+        &.active span:last-of-type {
+            transform: rotate(-45deg) translate(1px, -1px);
+        }
+    }
+}
+
+// barra
+#sidebar {
+    $width: 250px;
+    background: #7386D5;
+    color: #fff;
+    // transition: all 0.3s;
+    min-height: 100vh;
+    max-width: $width;
+    min-width: $width;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: center left;
+
+    &.active {
+        margin-left: -$width;
+        transform: rotateY(100deg);
+    }
+
+    .sidebar-header {
+        padding: 14px 20px;
+        background: #6d7fcc;
+        .sidebar-title {
+            margin: 0;
+        }
+    }
+
+    ul {
+        p {
+            color: #fff;
+            padding: 10px;
+        }
+        &.components {
+            padding: 20px 0;
+            border-bottom: 1px solid #47748b;
+        }
+
+        li {
+            a {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+                font-size: 1.1em;
+                color: inherit;
+                &:hover {
+                    color: #7386D5;
+                    background: #fff;
+                }
+            }
+
+        }
+    }
+
+
+    ul ul a {
+        font-size: 0.9em !important;
+        padding-left: 30px !important;
+        background: #6d7fcc;
+    }
+
+    ul li.active > a,
+    a[aria-expanded="true"] {
+        color: #fff;
+        background: #6d7fcc;
+    }
+
+    @media #{$break-md} {
+        & {
+            margin-left: -$width;
+            transform: rotateY(100deg);
+        }
+        &.active {
+            margin-left: 0;
+            transform: none;
+        }
+    }
+}

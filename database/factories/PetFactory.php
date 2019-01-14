@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 $factory->define(App\Pet::class, function (Faker $faker) {
     return [
         'uid' => $faker->uuid,
-        'user_uid' => '8b9f96d1-743b-462c-95da-87441126f426',
+        'user_uid' => '9e15970c-e61b-4be0-8549-2d2f8d17a45d',
         'process_id' => rand(0, 1),
         'name' => $faker->name,
         'phone' => $faker->phoneNumber,
@@ -18,7 +18,7 @@ $factory->define(App\Pet::class, function (Faker $faker) {
         'location' => "{$faker->streetName} - {$faker->city}, {$faker->country}",
         'latitude' => $faker->latitude,
         'longitude' => $faker->longitude,
-        'approved_at' => now(),
+        // 'approved_at' => now(),
         'created_at' => $faker->dateTime
     ];
 });

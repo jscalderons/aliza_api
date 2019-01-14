@@ -15,5 +15,8 @@ mix.js("resources/js/app.js", "public/js")
     .sass("resources/sass/app.scss", "public/css")
     .browserSync({
         open: false,
-        proxy: "http://aliza-api.test/"
+        proxy: "http://aliza-api.test"
     });
+
+
+mix.disableNotifications();

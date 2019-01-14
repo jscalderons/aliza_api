@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ImagesPet extends Model
 {
+    protected $primaryKey = 'uid';
 
     protected $hidden = [
         'pet_uid',

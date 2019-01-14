@@ -3,12 +3,29 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
+@import './components/variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+// ======== Components ========
+// Sidebar
+@import './components/sidebar';
+
+// ======== Helpers ========
+@import './components/helpers';
+
+body {
+    height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    perspective: 1500px;
+
+    .content {
+        width: 100%;
+    }
 }

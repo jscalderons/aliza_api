@@ -9,9 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -24,10 +21,32 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <main>
-            @yield('content')
-        </main>
+    <div id="app" class="wrapper">
+        @auth
+            @include('components.sidebar')
+        @endauth
+
+        <div class="content">
+            @include('components.navbar')
+
+            <main class="main">
+                @yield('content')
+            </main>
+        </div>
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        $(function () {
+
+            $('#sidebarCollapse').on('click', function () {
+                $(this).toggleClass('active');
+                $('#sidebar').toggleClass('active');
+            });
+
+        });
+    </script>
+    @yield('scripts')
 </body>
 </html>

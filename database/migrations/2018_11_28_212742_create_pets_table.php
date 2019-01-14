@@ -18,7 +18,7 @@ class CreatePetsTable extends Migration
             $table->uuid('user_uid');
             $table->integer('process_id')->unsigned();
             $table->string('name', 40)->nullable();
-            $table->string('phone')->nullable();
+            $table->string('phone', 25)->nullable();
             $table->smallInteger('age')->nullable();
             $table->boolean('sterilized')->default(false);
             $table->boolean('vaccinated')->default(false);
