@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Mascotas')
+
 @section('content')
 <div class="card-columns">
     @foreach ($pets as $pet)

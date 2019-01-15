@@ -22,7 +22,7 @@
             </a>
         </li>
         <li class="{{ Request::is('posts') ? 'active' : '' }}">
-            <a href="{{ route('posts') }}">
+            <a href="{{ route('posts.index') }}">
                 <span>
                     <i class="fas fa-paw fa-fw"></i>
                     Publicaciones

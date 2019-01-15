@@ -19,5 +19,9 @@ class Post extends Model
         'title',
     ];
 
+    public function user()
+    {
+        return $this->hasOne('App\User', 'uid', 'user_uid');
+    }
 
 }

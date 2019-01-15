@@ -3,6 +3,7 @@
 namespace App\Http\Traits;
 
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 trait ImagesControllerTrait {
 
@@ -66,6 +67,10 @@ trait ImagesControllerTrait {
     */
     protected function uploadImage($file, String $path, String $filename)
     {
+        if ($file instanceof UploadedFile) {
+            return $file->storeAs("{$this->prefix}/{$path}", $filename, $this->disk);
+        }
+
         return $this->storage()->put("{$this->prefix}/{$path}/{$filename}", $file);
     }
 

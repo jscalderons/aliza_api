@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} | @yield('title')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -28,8 +28,11 @@
 
         <div class="content">
             @include('components.navbar')
-
             <main class="container-fluid mt-4">
+                <div class="header">
+                    <h2 class="title text-capitalize">@yield('title')</h2>
+                    <hr class="my-4" />
+                </div>
                 @yield('content')
             </main>
         </div>
