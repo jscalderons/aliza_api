@@ -48,7 +48,8 @@ class PostController extends Controller
         $post->uid = Str::uuid();
         $post->user_uid = auth()->user()->uid;
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('image'))
+        {
             $post->image = $this->generateFilename();
             $this->uploadImage($request->image, "{$this->storageFolder}/{$post->uid}", $post->image);
         }

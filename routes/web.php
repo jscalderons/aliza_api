@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function() {
 
         // [POST]
         Route::post('/pet/{uid}/approve', 'PetController@approve')->name('pet.approve');
+        Route::post('/pet/{uid}/reject', 'PetController@reject')->name('pet.reject');
 
         // ================== POSTS ================== //
         Route::resource('posts', 'PostController');

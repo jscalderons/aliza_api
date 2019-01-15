@@ -26,4 +26,13 @@ class PetController extends Controller
 
         return back();
     }
+
+    public function reject($uid)
+    {
+        $pet = Pet::find($uid);
+
+        $pet->delete();
+
+        return back();
+    }
 }

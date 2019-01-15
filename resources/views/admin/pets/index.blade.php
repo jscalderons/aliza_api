@@ -32,7 +32,10 @@
                 @csrf
                 <button type="submit" class="btn btn-link">Aceptar</button>
             </form>
-            <a href="#" class="btn btn-outline-danger">Rechazar</a>
+            <form action="{{ route('pet.reject', $pet->uid) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">Rechazar</button>
+            </form>
         </div>
     </div>
     @endforeach
