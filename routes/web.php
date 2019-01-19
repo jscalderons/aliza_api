@@ -39,5 +39,8 @@ Route::middleware('auth')->group(function() {
 
         // ================== POSTS ================== //
         Route::resource('posts', 'PostController');
+
+        // ================== SITES ================== //
+        Route::resource('sites', 'SiteController');
     });
 });
