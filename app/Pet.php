@@ -14,7 +14,7 @@ class Pet extends Model
 
     protected $primaryKey = 'uid';
 
-    protected $dates = ['deleted_at'];
+    protected $dates = [ 'deleted_at' ];
 
     protected $hidden = [
         'created_at',

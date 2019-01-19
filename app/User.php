@@ -44,6 +44,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Pet', 'favorites', 'user_uid', 'pet_uid')->withTimeStamps();
     }
 
+    public function promotions() {
+        return $this->belongsToMany('App\Code', 'promotions', 'user_uid', 'code_uid')->withTimeStamps();
+    }
+
     public function pets() {
         return $this->hasMany('App\Pet');
     }
@@ -56,5 +60,10 @@ class User extends Authenticatable
     public function sites()
     {
         return $this->hasMany('App\Minisite');
+    }
+
+    public function codes()
+    {
+        return $this->hasMany('App\Code');
     }
 }

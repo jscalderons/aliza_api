@@ -19,63 +19,43 @@
 
 Route::namespace('Api')->group(function() {
 
-    // ================== access ================== //
-        // [POST]
-        Route::post('/auth', 'Auth\AccessController@auth');
+        // ================== Listas ================== //
+        Route::get('/list/processes', 'ListController@getAllProcesses'); // Obtener una lista de procesos
+        Route::get('/list/categories', 'ListController@getAllCategories'); // Obtener una lista de categorias
 
-    // ================== Listas ================== //
-        // [GET]
-        Route::get('/list/processes', 'ListController@getAllProcesses');
-        Route::get('/list/categories', 'ListController@getAllCategories');
-
-    // ================== User ================== //
-        // [GET]
-        Route::middleware('auth:api')->get('/my_favorites', 'UserController@myFavorites'); // Obtener todas las mascotas del usuario
+        // ================== User ================== //
+        Route::post('/auth', 'Auth\AccessController@auth'); // Autentificar|registrar usuario
         Route::middleware('auth:api')->get('/my_pets', 'UserController@myPets'); // Obtener todas las mascotas del usuario
-        Route::middleware('auth:api')->get('/my_sites', 'UserController@mySites'); // Obtener todas las mascotas del usuario
-        Route::middleware('auth:api')->get('/my_posts', 'UserController@myPosts'); // Obtener todas las mascotas del usuario
-
-        // [POST]
-        Route::middleware('auth:api')->post('/favorite/{pet}', 'UserController@favoritePet'); // agregar favorito
-
-        // [PUT]
-        Route::middleware('auth:api')->put('/unfavorite/{pet}', 'UserController@unFavoritePet'); // eliminar favorito
+        Route::middleware('auth:api')->get('/my_favorites', 'UserController@myFavorites'); // Obtener todas las mascotas favoritas del usuario
+        Route::middleware('auth:api')->get('/my_sites', 'UserController@mySites'); // Obtener todos los sitios del usuario
+        Route::middleware('auth:api')->get('/my_posts', 'UserController@myPosts'); // Obtener todos las publicaciones del usuario
+        Route::middleware('auth:api')->get('/my_codes', 'UserController@myCodes'); // Obtener todos las promociones del usuario
+        Route::middleware('auth:api')->post('/favorite/{pet}', 'UserController@favoritePet'); // Añadir favorito
+        Route::middleware('auth:api')->put('/unfavorite/{pet}', 'UserController@unFavoritePet'); // Quitar favorito
+        Route::middleware('auth:api')->post('/promotion/{code}', 'UserController@addPromotionalCode'); // Añadir una promoción
+        // Route::middleware('auth:api')->post('/promotion/{code}', 'UserController@addPromotionalCode'); // canjear una promoción
 
     // ================== pets ================== //
-        // [GET]
-        Route::middleware('auth:api')->get('/pet/{uid}', 'PetController@show'); // Obtener todas las mascotas del usuario
-
-        // [POST]
         Route::post('/pets', 'PetController@index'); // Obtener todas las mascotas
-        Route::middleware('auth:api')->post('/pet', 'PetController@store'); // nueva mascotas
+        Route::middleware('auth:api')->get('/pet/{uid}', 'PetController@show'); // Obtener información de una mascota
+        Route::middleware('auth:api')->post('/pet', 'PetController@store'); // Registrar una mascotas
+        Route::middleware('auth:api')->put('/pet/{uid}', 'PetController@update'); // Editar mascotas
+        Route::middleware('auth:api')->delete('pet/{uid}/image/{filename}', 'PetController@destroyImage'); // Eliminar imágen de una mascota
+        Route::middleware('auth:api')->delete('pet/{uid}', 'PetController@destroy'); // Desactivar mascota
 
-        // [PUT]
-        Route::middleware('auth:api')->put('/pet/{uid}', 'PetController@update'); // editar mascotas
-
-        // [DELETE]
-        Route::middleware('auth:api')->delete('pet/{uid}/image/{filename}', 'PetController@destroyImage'); // Eliminar imagenes
-        Route::middleware('auth:api')->delete('pet/{uid}', 'PetController@destroy'); // Eliminar imagenes
-
-
-    // ================== minisites ================== //
-        // [POST]
-        Route::post('/sites', 'MinisiteController@index');
-        Route::middleware('auth:api')->post('/site', 'MinisiteController@store');
-
-        // [PUT]
-        Route::middleware('auth:api')->put('/site/{uid}', 'MinisiteController@update');
+    // ================== sites ================== //
+        Route::post('/sites', 'MinisiteController@index'); // Obtiene todos los sitios
+        Route::middleware('auth:api')->post('site', 'MinisiteController@store'); // Registra un sitio
+        Route::middleware('auth:api')->put('site/{uid}', 'MinisiteController@update'); // Edita un sitio
 
     // ================== Posts ================== //
-        // [GET]
-        Route::get('/posts', 'PostController@index'); // Obtener todos las publicaciones
+        Route::get('/posts', 'PostController@index'); // Obtiene todas las publicaciones
+        Route::middleware('auth:api')->post('/post', 'PostController@store'); // Registrar una publicación
+        Route::middleware('auth:api')->put('/post/{uid}', 'PostController@update'); // Edita una publicacóo
 
-        // [POST]
-        Route::middleware('auth:api')->post('/post', 'PostController@store'); // Registrar una nueva publicacion
-
-        // [PUT]
-        Route::middleware('auth:api')->put('/post/{uid}', 'PostController@update');
-
-    // ================== Test ================== //
-        // Route::post('/test', 'PetController@upload'); // Registrar una nueva publicacion
-
+    // ================== CODE ================== //
+        Route::get('codes', 'CodeController@index'); // Obtiene todos los códigos de promición
+        Route::middleware('auth:api')->get('code/{code}/promoted-users', 'CodeController@promotedUsers'); // Obtiene todos los códigos de promición
+        Route::middleware('auth:api')->post('code', 'CodeController@store'); // Registra un códigos de promición
+        Route::middleware('auth:api')->delete('code/{code}', 'CodeController@destroy'); // Desactiva una promoción
 });

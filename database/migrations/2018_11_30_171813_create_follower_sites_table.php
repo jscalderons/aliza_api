@@ -16,7 +16,7 @@ class CreateFollowerSitesTable extends Migration
         Schema::create('follower_sites', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_uid');
-            $table->uuid('minisite_uid');
+            $table->uuid('site_uid');
             $table->timestamps();
         });
     }

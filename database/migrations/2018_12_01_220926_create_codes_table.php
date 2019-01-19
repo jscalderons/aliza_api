@@ -16,12 +16,13 @@ class CreateCodesTable extends Migration
         Schema::create('codes', function (Blueprint $table) {
             $table->uuid('uid')->primary();
             $table->uuid('user_uid');
-            $table->uuid('minisite_uid');
+            $table->uuid('site_uid');
             $table->string('description');
             $table->integer('quantity');
-            $table->integer('redeemed');
+            $table->integer('redeemed')->default(0);
             $table->date('max_date_valid');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
