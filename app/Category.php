@@ -10,4 +10,9 @@ class Category extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function sites()
+    {
+        return $this->hasMany('App\Site');
+    }
 }

@@ -29,6 +29,14 @@
                 </span>
             </a>
         </li>
+        <li class="{{ Request::is('sites') ? 'active' : '' }}">
+            <a href="{{ route('sites.index') }}">
+                <span>
+                    <i class="fas fa-paw fa-fw"></i>
+                    Tiendas locales
+                </span>
+            </a>
+        </li>
         {{--<li>
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
