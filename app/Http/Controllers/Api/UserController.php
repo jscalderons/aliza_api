@@ -37,11 +37,11 @@ class UserController extends Controller
         return response($myPosts);
     }
 
-    public function myCodes()
+    public function myPromotions()
     {
-        $myCodes = auth()->user()->codes()->paginate(env('PAGINATE', 6));
+        $myPromotions = auth()->user()->promotions()->paginate(env('PAGINATE', 6));
 
-        return response($myCodes);
+        return response($myPromotions);
     }
     /**
      * Favorite a particular post
@@ -69,10 +69,5 @@ class UserController extends Controller
         return $this->deletedResponse();
     }
 
-    public function addPromotionalCode(\App\Code $code)
-    {
-        auth()->user()->promotions()->attach($code->uid);
 
-        return $this->createdResponse();
-    }
 }

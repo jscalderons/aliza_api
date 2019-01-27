@@ -14,10 +14,13 @@ class CreatePromotionsTable extends Migration
     public function up()
     {
         Schema::create('promotions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('uid')->primary();
             $table->uuid('user_uid');
-            $table->uuid('code_uid');
-            $table->date('validation_date')->nullable();
+            $table->uuid('site_uid');
+            $table->string('description');
+            $table->integer('quantity');
+            $table->integer('redeemed')->default(0);
+            $table->date('max_date_valid');
             $table->timestamps();
             $table->softDeletes();
         });
