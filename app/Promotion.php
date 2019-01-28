@@ -25,14 +25,19 @@ class Promotion extends Model
 
     protected $dates = [ 'deleted_at' ];
 
-    public function scopeAvailable($query)
-    {
-        return $query->where('max_date_valid', '>=', date('Y-m-d'));
-    }
-
     public function coupons() {
         return $this->belongsToMany('App\User', 'coupons', 'promotion_uid', 'user_uid')->withTimeStamps();
     }
 
+    public function scopeAvailable($query, $user)
+    {
+        return $query->select('promotions.*')
+                    ->leftJoin('coupons', function($join) use ($user) {
+                        $join->on('coupons.promotion_uid', 'promotions.uid')
+                            ->where('coupons.user_uid', $user->uid);
+                    })
+                    ->where('promotions.max_date_valid', '>=', date('Y-m-d'))
+                    ->whereNull('coupons.id');
+    }
 
 }

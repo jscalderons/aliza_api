@@ -15,23 +15,21 @@ class AccessController extends Controller
 
     public function auth(Request $request) {
 
-        $findUser = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
-        if (!$findUser) {
-            $user = new User();
-            $user->uid = Str::uuid();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->email);
-            $user->image = $request->image ?? "https://api.adorable.io/avatars/170/" . str_random(2);
-            $user->api_token = str_random(60);
-            $user->provider = $request->provider;
-            $user->save();
-
-            return response($user);
+        if (!$user) {
+            $user = User::create([
+                'uid' => Str::uuid(),
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->email),
+                'image' => $request->image ?? "https://api.adorable.io/avatars/170/" . str_random(2),
+                'api_token' => str_random(60),
+                'provider' => $request->provider
+            ]);
         }
 
-        return response($findUser);
+        return response($user->makeVisible('api_token'));
     }
 
 

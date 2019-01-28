@@ -22,7 +22,7 @@ class MinisiteController extends Controller
      */
     public function index()
     {
-        $sites = Minisite::with('user');
+        $sites = Minisite::with('user', 'promotions');
 
         // Filtrar
         if (request()->has('filters')) {
@@ -154,5 +154,4 @@ class MinisiteController extends Controller
 
         return $this->deleteImage($path, $filename);
     }
-
 }

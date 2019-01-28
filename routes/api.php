@@ -29,13 +29,11 @@ Route::namespace('Api')->group(function() {
         Route::middleware('auth:api')->get('/my_favorites', 'UserController@myFavorites'); // Obtener todas las mascotas favoritas del usuario
         Route::middleware('auth:api')->get('/my_sites', 'UserController@mySites'); // Obtener todos los sitios del usuario
         Route::middleware('auth:api')->get('/my_posts', 'UserController@myPosts'); // Obtener todos las publicaciones del usuario
+        Route::middleware('auth:api')->get('my_promotions', 'UserController@myPromotions'); // Obtener todos las promociones del usuario
+        Route::middleware('auth:api')->get('my_coupons', 'UserController@myCoupons'); // Obtener todos las cupones del usuario
 
         Route::middleware('auth:api')->post('/favorite/{pet}', 'UserController@favoritePet'); // Añadir favorito
         Route::middleware('auth:api')->put('/unfavorite/{pet}', 'UserController@unFavoritePet'); // Quitar favorito
-
-        Route::middleware('auth:api')->get('my_promotions', 'UserController@myPromotions'); // Obtener todos las promociones del usuario
-
-
 
     // ================== pets ================== //
         Route::post('/pets', 'PetController@index'); // Obtener todas las mascotas
@@ -56,7 +54,7 @@ Route::namespace('Api')->group(function() {
         Route::middleware('auth:api')->put('/post/{uid}', 'PostController@update'); // Edita una publicacóo
 
     // ================== CODE ================== //
-        Route::get('promotions', 'PromotionController@index'); // Obtiene todos los códigos de promición
+        Route::middleware('auth:api')->get('promotions', 'PromotionController@index'); // Obtiene todos los códigos de promición
         Route::middleware('auth:api')->post('promotion', 'PromotionController@store'); // Registra una promoción
         Route::middleware('auth:api')->delete('promotion/{promotion}', 'PromotionController@destroy'); // Desactiva una promoción
 

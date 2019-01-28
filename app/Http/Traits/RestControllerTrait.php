@@ -77,7 +77,7 @@ trait RestControllerTrait {
 	// 	return $this->deletedResponse();
     // }
 
-	protected function successResponse($data) {
+	protected function successResponse($data = []) {
 
 		$response = [
 			'code' => 200,

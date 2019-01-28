@@ -30,6 +30,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
+        'api_token',
         'email_verified_at',
         'created_at',
         'updated_at',
@@ -45,7 +46,7 @@ class User extends Authenticatable
     }
 
     public function coupons() {
-        return $this->belongsToMany('App\Promotion', 'coupons', 'user_uid', 'promotion_uid')->withTimeStamps();
+        return $this->belongsToMany('App\Promotion', 'coupons', 'user_uid', 'promotion_uid');
     }
 
     public function pets() {

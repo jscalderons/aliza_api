@@ -14,7 +14,10 @@ class PromotionController extends Controller
 
     public function index()
     {
-        return response(Promotion::available()->paginate(env('PAGINATE', 6)));
+        $promotions = Promotion::available(auth()->user())
+                                ->paginate(env('PAGINATE', 6));
+
+        return response($promotions);
     }
 
     public function store(Request $request)
@@ -32,11 +35,6 @@ class PromotionController extends Controller
         return $this->errorResponse('El recurso no se puedo agregar.');
     }
 
-    public function promotedUsers(Promotion $promotion)
-    {
-
-    }
-
     public function destroy(Promotion $promotion)
     {
         if ($promotion->delete())
@@ -47,13 +45,13 @@ class PromotionController extends Controller
         return $this->errorResponse('No se pudo eliminar el registro');
     }
 
-    public function attachCoupons(\App\Promotion $promotion)
+    public function attachCoupons(Promotion $promotion)
     {
         if ($promotion->redeemed < $promotion->quantity)
         {
-            $sync = auth()->user()->coupons()->sync($promotion->uid);
-
-            if ($sync["attached"]) {
+            $coupons = auth()->user()->coupons();
+            if (!$coupons->find($promotion->uid)) {
+                $coupons->attach($promotion->uid);
                 $promotion->redeemed = $promotion->redeemed + 1;
                 $promotion->update();
             }
@@ -64,17 +62,16 @@ class PromotionController extends Controller
         return $this->errorResponse('Promoción llena, Ya no hay cupones.');
     }
 
-    public function getUsers($promotion_uid)
+    public function getUsers(Promotion $promotion)
     {
-        $users = \DB::table('coupons')
-            ->select('users.*')
-            ->join('users', 'users.uid', '=', 'coupons.user_uid')
-            ->where('coupons.promotion_uid', $promotion_uid)
-            ->whereNull('coupons.validated_at')
-            ->paginate(env('PAGINATE', 6));
+        $users = $promotion->coupons()
+                        ->whereNull('validated_at')
+                        ->paginate(env('PAGINATE', 6));
 
         return response($users);
     }
+
+
 
     /**
      * Canjea la promoción

@@ -93,8 +93,6 @@ class PetController extends Controller
     {
         $pet = Pet::with('user')->find($uid);
 
-        $pet->user->makeHidden('api_token');
-
         return $this->successResponse($pet);
     }
 

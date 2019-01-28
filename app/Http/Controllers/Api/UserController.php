@@ -43,6 +43,16 @@ class UserController extends Controller
 
         return response($myPromotions);
     }
+
+    public function myCoupons()
+    {
+        $myCoupons = auth()->user()->coupons()
+                        ->whereNull('validated_at')
+                        ->paginate(env('PAGINATE', 6));
+
+        return response($myCoupons);
+    }
+
     /**
      * Favorite a particular post
      *

@@ -38,6 +38,11 @@ class Minisite extends Model
         return $this->hasOne('App\User', 'uid', 'user_uid');
     }
 
+    public function promotions()
+    {
+        return $this->hasMany('App\Promotion', 'site_uid', 'uid');
+    }
+
     public function scopeSearch($query, $search)
     {
         return $query->where('name', 'like', "%{$search}%")
