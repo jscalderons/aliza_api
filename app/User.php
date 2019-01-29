@@ -20,8 +20,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'uid',
         'name',
         'email',
+        'password',
+        'image',
+        'api_token',
+        'provider'
     ];
 
     /**
@@ -32,7 +37,6 @@ class User extends Authenticatable
     protected $hidden = [
         'api_token',
         'email_verified_at',
-        'created_at',
         'updated_at',
         'deleted_at',
         'password',

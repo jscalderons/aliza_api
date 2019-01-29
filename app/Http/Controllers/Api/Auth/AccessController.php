@@ -25,8 +25,9 @@ class AccessController extends Controller
                 'password' => Hash::make($request->email),
                 'image' => $request->image ?? "https://api.adorable.io/avatars/170/" . str_random(2),
                 'api_token' => str_random(60),
-                'provider' => $request->provider
+                'provider' => $request->provider ?? 'test'
             ]);
+            dd($user);
         }
 
         return response($user->makeVisible('api_token'));
