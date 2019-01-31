@@ -3,12 +3,16 @@
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="approved-tab" data-toggle="tab" href="#approved" role="tab" aria-controls="approved" aria-selected="true">
-                    <i class="far fa-thumbs-up"></i> - Mascotas por aprovar
+                    <i class="far fa-thumbs-up"></i>
+                    Mascotas por aprovar
+                    <span v-show="petsApproved.length" class="badge badge-danger ml-3" v-text="petsApproved.length"></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="rejected-tab" data-toggle="tab" href="#rejected" role="tab" aria-controls="rejected" aria-selected="false">
-                    <i class="far fa-thumbs-down"></i> - Mascotas rechazadas
+                    <i class="far fa-thumbs-down"></i>
+                    Mascotas rechazadas
+                    <span v-show="petsRejected.length" class="badge badge-danger ml-3" v-text="petsRejected.length"></span>
                 </a>
             </li>
         </ul>
