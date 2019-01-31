@@ -17,7 +17,7 @@
             <a href="{{ route('pets') }}">
                 <span>
                     <i class="fas fa-paw fa-fw"></i>
-                    mascotas
+                    Mascotas
                 </span>
             </a>
         </li>

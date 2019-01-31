@@ -32,10 +32,13 @@ Route::middleware('auth')->group(function() {
         // ================== PETS ================== //
         // [GET]
         Route::get('pets', 'PetController@index')->name('pets');
+        Route::get('pets/approved', 'PetController@getPetListToApproved');
+        Route::get('pets/rejected', 'PetController@getPetListToRejected');
 
         // [POST]
-        Route::post('/pet/{uid}/approve', 'PetController@approve')->name('pet.approve');
-        Route::post('/pet/{uid}/reject', 'PetController@reject')->name('pet.reject');
+        Route::put('pet/{pet}/approve', 'PetController@approve');
+        Route::put('pet/{pet}/reject', 'PetController@reject');
+        Route::put('pet/{uid}/restore', 'PetController@restore');
 
         // ================== POSTS ================== //
         Route::resource('posts', 'PostController');

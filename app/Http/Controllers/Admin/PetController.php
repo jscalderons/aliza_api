@@ -11,28 +11,45 @@ class PetController extends Controller
 
     public function index()
     {
-        $pets = \App\Pet::whereNull('approved_at')->get();
-
-        return view('admin.pets.index', compact('pets'));
+        return view('admin.pets.index');
     }
 
-    public function approve($uid)
+    public function approve(Pet $pet)
     {
-        $pet = Pet::find($uid);
-
         $pet->approved_at = now();
 
         $pet->update();
 
-        return back();
+        return response($pet);
     }
 
-    public function reject($uid)
+    public function reject(Pet $pet)
     {
-        $pet = Pet::find($uid);
-
         $pet->delete();
 
-        return back();
+        return response($pet);
+    }
+
+    public function restore($uid)
+    {
+        $pet = Pet::onlyTrashed()
+                    ->where('uid', $uid)
+                    ->restore();
+
+        return response($pet);
+    }
+
+    public function getPetListToApproved()
+    {
+        $pets = Pet::whereNull('approved_at')->with('images')->get();
+
+        return response($pets);
+    }
+
+    public function getPetListToRejected()
+    {
+        $pets = Pet::onlyTrashed()->with('images')->get();
+
+        return response($pets);
     }
 }

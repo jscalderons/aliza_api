@@ -17,7 +17,6 @@ class Pet extends Model
     protected $dates = [ 'deleted_at' ];
 
     protected $hidden = [
-        'created_at',
         'updated_at',
         'pivot'
     ];
