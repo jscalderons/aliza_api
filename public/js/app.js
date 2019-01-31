@@ -47828,21 +47828,22 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", { staticClass: "card-img-overlay" }, [
-          _c("h4", { staticClass: "card-title text-truncate" }, [
-            _vm.pet.gender == "F"
+          _c("h4", { staticClass: "card-title" }, [
+            _vm.pet.gender == "M"
               ? _c("i", {
                   staticClass: "fas fa-venus",
                   staticStyle: { color: "#ff80ab" }
                 })
               : _vm._e(),
             _vm._v(" "),
-            _vm.pet.gender == "M"
+            _vm.pet.gender == "H"
               ? _c("i", {
                   staticClass: "fas fa-mars",
                   staticStyle: { color: "#8c9eff" }
                 })
               : _vm._e(),
-            _vm._v("\n            " + _vm._s(_vm.pet.name) + "\n        ")
+            _vm._v(" "),
+            _c("span", { domProps: { textContent: _vm._s(_vm.pet.name) } })
           ]),
           _vm._v(" "),
           _c("small", { staticClass: "card-subtitle" }, [

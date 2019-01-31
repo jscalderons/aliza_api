@@ -3,9 +3,9 @@
         <img class="card-img" :src="image" :alt="pet.name"/>
         <div class="card-img-overlay">
             <h4 class="card-title text-truncate">
-                <i v-if="pet.gender == 'F'" class="fas fa-venus" style="color: #ff80ab"></i>
-                <i v-if="pet.gender == 'M'" class="fas fa-mars" style="color: #8c9eff"></i>
-                {{pet.name}}
+                <i v-if="pet.gender == 'M'" class="fas fa-venus" style="color: #ff80ab"></i>
+                <i v-if="pet.gender == 'H'" class="fas fa-mars" style="color: #8c9eff"></i>
+                <span v-text="pet.name"></span>
             </h4>
             <small class="card-subtitle">
                 <i class="far fa-clock"></i>
@@ -37,6 +37,7 @@ export default {
     border: none;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    min-height: 280px;
 
     img.card-img {
         transition: all 2s;
