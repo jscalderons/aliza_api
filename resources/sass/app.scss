@@ -9,11 +9,9 @@
 @import '~bootstrap/scss/bootstrap';
 
 // ======== Components ========
-// Sidebar
 @import './components/sidebar';
-
-// Card
 @import './components/card';
+@import './components/toolbar';
 
 // ======== Helpers ========
 @import './components/helpers';

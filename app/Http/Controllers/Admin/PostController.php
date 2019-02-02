@@ -54,7 +54,9 @@ class PostController extends Controller
             $this->uploadImage($request->image, "{$this->storageFolder}/{$post->uid}", $post->image);
         }
 
-        $post->save();
+        if ($post->save()) {
+            return $this->index();
+        }
 
         return back();
     }
@@ -118,6 +120,6 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = find($id);
     }
 }

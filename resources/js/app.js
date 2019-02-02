@@ -20,8 +20,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
-Vue.component('pet-card', require('./components/PetCard.vue'));
-Vue.component("pet-card-container", require("./containers/PetCardContainer.vue"));
+Vue.component("pet-card-container", require("./components/PetCardContainer"));
+Vue.component("textarea-editor", require("./components/TextareaEditor"));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

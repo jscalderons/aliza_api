@@ -1,6 +1,6 @@
 {
     "private": true,
-    "version": "2.2.2",
+    "version": "2.2.3",
     "author": {
         "name": "OkapiaSoft",
         "email": "info@okapiasoft.com",
@@ -27,6 +27,7 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
-        "browser-sync": "^2.26.3"
+        "browser-sync": "^2.26.3",
+        "vue-quill-editor": "^3.0.6"
     }
 }

@@ -10637,6 +10637,18 @@ a.text-dark:focus {
   float: right;
 }
 
+.header-page {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-bottom: 1rem;
+}
+
 .vh-100 {
   height: 100vh;
 }

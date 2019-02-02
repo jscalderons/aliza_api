@@ -23,5 +23,4 @@ class Post extends Model
     {
         return $this->hasOne('App\User', 'uid', 'user_uid');
     }
-
 }

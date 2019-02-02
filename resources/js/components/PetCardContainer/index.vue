@@ -53,7 +53,12 @@
 </template>
 
 <script>
+import PetCard from './PetCard'
+
 export default {
+    components: {
+        PetCard
+    },
     data() {
         return {
             petsApproved: [],

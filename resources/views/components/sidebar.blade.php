@@ -24,7 +24,7 @@
         <li class="{{ Request::is('posts') ? 'active' : '' }}">
             <a href="{{ route('posts.index') }}">
                 <span>
-                    <i class="fas fa-paw fa-fw"></i>
+                    <i class="far fa-newspaper fa-fw"></i>
                     Publicaciones
                 </span>
             </a>
