@@ -47,6 +47,7 @@ class UserController extends Controller
     public function myCoupons()
     {
         $myCoupons = auth()->user()->coupons()
+                        ->with('site')
                         ->whereNull('validated_at')
                         ->paginate(env('PAGINATE', 6));
 

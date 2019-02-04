@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use \App\Pet;
+use \App\Mail\PetShipped;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Traits\RestControllerTrait as RESTTrait;
 use App\Http\Traits\ImagesControllerTrait as ImagesTrait;
 
@@ -75,6 +77,7 @@ class PetController extends Controller
 
         if ($newPet->save()) {
             $this->storeImages($request->images, $newPet->uid);
+            // Mail::to(env('MAIL_TO'))->send(new PetShipped($newPet));
         }
 
         return $this->createdResponse($newPet);

@@ -25,6 +25,11 @@ class Promotion extends Model
 
     protected $dates = [ 'deleted_at' ];
 
+    public function site()
+    {
+        return $this->hasOne('App\Minisite', 'uid', 'site_uid');
+    }
+
     public function coupons() {
         return $this->belongsToMany('App\User', 'coupons', 'promotion_uid', 'user_uid')->withTimeStamps();
     }
