@@ -52,8 +52,8 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $pets->links() }}
             </div>
+            {{ $pets->links() }}
         </div>
     </div>
 </div>

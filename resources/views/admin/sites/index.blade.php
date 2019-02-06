@@ -69,8 +69,8 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $sites->links() }}
         </div>
+        {{ $sites->links() }}
     </div>
 </div>
 @endsection
