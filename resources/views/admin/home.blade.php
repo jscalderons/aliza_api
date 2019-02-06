@@ -1,5 +1,19 @@
 @extends('layouts.admin')
 
+@section('title', 'Inicio')
+
+@section('breadcrumb')
+    <li class="breadcrumb-item active" aria-current="page">
+        <i class="fas fa-chart-bar"></i>
+        Resumen
+    </li>
+@endsection
+
+@section('header-title')
+    <i class="fas fa-chart-bar"></i>
+    Resumen
+@endsection
+
 @section('content')
     <div class="row">
         {{-- pets --}}
@@ -23,7 +37,10 @@
                     </div>
                     <h2 class="card-title fa-3x">{{ $users->count() }}</h2>
                     <h5 class="card-subtitle text-muted">Nuevos usuarios</h5>
-                    <small>Entre: {{now()->startOfWeek()->format('Y-m-d')}} a {{now()->format('Y-m-d')}}</small>
+                    <small>Entre:
+                        <time class="font-italic">{{now()->startOfWeek()->format('Y-m-d')}}</time>
+                        a
+                        <time class="font-italic">{{now()->endOfWeek()->format('Y-m-d')}}</time></small>
                 </div>
             </div>
         </div>

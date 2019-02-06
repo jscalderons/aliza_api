@@ -58,7 +58,10 @@ class SiteController extends Controller
             $this->uploadImage($request->image, "{$this->storageFolder}/{$site->uid}", $site->image);
         }
 
-        $site->save();
+        if ($site->save())
+        {
+            return $this->index();
+        }
 
         return back();
     }
@@ -80,10 +83,9 @@ class SiteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($uid)
+    public function edit(Site $site)
     {
-        $site = Site::find($uid);
-        $categories = Category::where('id','<>', $site->category_id)->get();
+        $categories = Category::all();
 
         return view('admin.sites.edit', compact('site', 'categories'));
     }
@@ -102,15 +104,13 @@ class SiteController extends Controller
         if ($request->hasFile('image'))
         {
             $path = "{$this->storageFolder}/{$uid}";
-            $site->image = $this->generateFilename();
-
-            if ($this->uploadImage($request->image, $path, $site->image))
-            {
-                $this->deleteImage($path, $site->getOriginal('image'));
-            }
+            $this->uploadImage($request->image, $path, $site->image);
         }
 
-        $site->update($request->all());
+        if ($site->update($request->all()))
+        {
+            return $this->edit($site);
+        }
 
         return back();
     }

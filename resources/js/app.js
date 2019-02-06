@@ -22,6 +22,7 @@ window.Vue = require('vue');
 
 Vue.component("pet-card-container", require("./components/PetCardContainer"));
 Vue.component("textarea-editor", require("./components/TextareaEditor"));
+Vue.component("input-file", require("./components/InputFile"));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

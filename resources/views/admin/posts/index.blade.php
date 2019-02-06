@@ -4,20 +4,21 @@
 
 
 @section('breadcrumb')
-    <li class="breadcrumb-item">
+    <li class="breadcrumb-item active" aria-current="page">
         <i class="far fa-newspaper"></i>
+        Publicaciones
     </li>
-    <li class="breadcrumb-item active" aria-current="page">Lista</li>
 @endsection
 
-@section('header-page')
-    Lista
+@section('header-title')
+    <i class="far fa-newspaper"></i>
+    Publicaciones
 @endsection
 
 @section('actions-page')
     <a href="{{ route('posts.create') }}" class="btn btn-primary">
-        <i class="fas fa-plus"></i>
-        Agregar
+        <i class="fas fa-plus-square"></i>
+        Nuevo
     </a>
 @endsection
 
@@ -41,7 +42,7 @@
                         @foreach ($posts as $post)
                             <tr>
                                 <td>
-                                    <a href="{{ route('posts.edit', $post->uid) }}" class="btn btn-warning">
+                                    <a href="{{ route('posts.edit', $post->uid) }}" class="btn btn-link">
                                         <i class="fas fa-pen"></i>
                                     </a>
                                 </td>

@@ -142,19 +142,14 @@ class PetController extends Controller
     */
     private function storeImages(Array $base64Images, String $uid)
     {
-        foreach ($base64Images as $base64)
+        foreach ($base64Images as $image)
         {
-            $image = $this->base64ImageDecoder($base64);
+            $path = "{$this->storageFolder}/{$uid}";
+            $filename = $this->generateFilename();
 
-            if ($image)
+            if ($this->uploadImage($image, $path, $filename))
             {
-                $path = "{$this->storageFolder}/{$uid}";
-                $filename = $this->generateFilename();
-
-                if ($this->uploadImage($image, $path, $filename))
-                {
-                    $this->registerImage($filename, $uid);
-                }
+                $this->registerImage($filename, $uid);
             }
         }
     }

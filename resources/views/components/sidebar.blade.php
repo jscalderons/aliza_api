@@ -8,12 +8,12 @@
         <li class="{{ Request::is('home') ? 'active' : '' }}">
             <a href="{{ route('home') }}">
                 <span>
-                    <i class="fas fa-home fa-fw"></i>
-                    Inicio
+                    <i class="far fa-chart-bar fa-fw"></i>
+                    Resumen
                 </span>
             </a>
         </li>
-        <li class="{{ Request::is('pets') ? 'active' : '' }}">
+        <li class="{{ Request::is('pets', 'pets/*') ? 'active' : '' }}">
             <a href="{{ route('pets') }}">
                 <span>
                     <i class="fas fa-paw fa-fw"></i>
@@ -21,7 +21,7 @@
                 </span>
             </a>
         </li>
-        <li class="{{ Request::is('posts') ? 'active' : '' }}">
+        <li class="{{ Request::is('posts', 'posts/*') ? 'active' : '' }}">
             <a href="{{ route('posts.index') }}">
                 <span>
                     <i class="far fa-newspaper fa-fw"></i>
@@ -29,11 +29,11 @@
                 </span>
             </a>
         </li>
-        <li class="{{ Request::is('sites') ? 'active' : '' }}">
+        <li class="{{ Request::is('sites', 'sites/*') ? 'active' : '' }}">
             <a href="{{ route('sites.index') }}">
                 <span>
-                    <i class="fas fa-paw fa-fw"></i>
-                    Tiendas locales
+                    <i class="fas fa-store fa-fw"></i>
+                    Locales
                 </span>
             </a>
         </li>

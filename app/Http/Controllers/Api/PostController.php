@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Image;
 use \App\Post;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -74,19 +75,12 @@ class PostController extends Controller
      * @return String
      * @return Null
     */
-    private function storeImage(String $base64Images, String $uid)
+    private function storeImage($image, String $uid)
     {
-        $image = $this->base64ImageDecoder($base64Images);
+        $path = "{$this->storageFolder}/{$uid}";
+        $filename = $this->generateFilename();
 
-        if ($image)
-        {
-            $path = "{$this->storageFolder}/{$uid}";
-            $filename = $this->generateFilename();
-
-            return $this->uploadImage($image, $path, $filename) ? $filename : null;
-        }
-
-        return null;
+        return $this->uploadImage($image, $path, $filename) ? $filename : null;
     }
 
     public function destroyImage(String $uid, String $filename)

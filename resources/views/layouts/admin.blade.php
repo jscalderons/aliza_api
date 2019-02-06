@@ -29,20 +29,30 @@
         <div class="content">
             @include('components.navbar')
             <main class="container-fluid">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb m-0 p-0 bg-transparent">
-                        @yield('breadcrumb')
-                    </ol>
-                </nav>
-                <header class="header-page">
-                    <h2 class="header-page--title">
-                        @yield('header-page')
-                    </h2>
-                    <div class="header-page--toolbar">
-                        @yield('actions-page')
+                <header class="page-header">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb page-header--breadcrumb">
+                            <li class="breadcrumb-item">
+                                <i class="fas fa-home"></i>
+                            </li>
+                            @yield('breadcrumb')
+                        </ol>
+                    </nav>
+                    <div class="page-header--headline">
+                        <div class="page-header--title">
+                            @yield('header-title')
+                            <small class="page-header--subtitle">
+                                @yield('header-subtitle')
+                            </small>
+                        </div>
+                        <div class="page-header--toolbar">
+                            @yield('actions-page')
+                        </div>
                     </div>
                 </header>
-                @yield('content')
+                <div class="pb-5">
+                    @yield('content')
+                </div>
             </main>
         </div>
     </div>

@@ -50,7 +50,7 @@ class User extends Authenticatable
     }
 
     public function coupons() {
-        return $this->belongsToMany('App\Promotion', 'coupons', 'user_uid', 'promotion_uid');
+        return $this->belongsToMany('App\Promotion', 'coupons', 'user_uid', 'promotion_uid')->withTimeStamps();
     }
 
     public function pets() {

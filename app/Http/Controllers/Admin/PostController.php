@@ -54,7 +54,8 @@ class PostController extends Controller
             $this->uploadImage($request->image, "{$this->storageFolder}/{$post->uid}", $post->image);
         }
 
-        if ($post->save()) {
+        if ($post->save())
+        {
             return $this->index();
         }
 
@@ -78,10 +79,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($uid)
+    public function edit(Post $post)
     {
-        $post = Post::find($uid);
-
         return view('admin.posts.edit', compact('post'));
     }
 
@@ -99,15 +98,13 @@ class PostController extends Controller
         if ($request->hasFile('image'))
         {
             $path = "{$this->storageFolder}/{$uid}";
-            $post->image = $this->generateFilename();
-
-            if ($this->uploadImage($request->image, $path, $post->image))
-            {
-                $this->deleteImage($path, $post->getOriginal('image'));
-            }
+            $this->uploadImage($request->image, $path, $post->image);
         }
 
-        $post->update($request->all());
+        if ($post->update($request->all()))
+        {
+            return $this->edit($post);
+        }
 
         return back();
     }

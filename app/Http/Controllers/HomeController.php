@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         $pets = \App\Pet::whereNull('approved_at')->get();
-        $users = \App\User::whereBetween('created_at', [now()->startOfWeek(), now()])->get();
+        $users = \App\User::whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->get();
 
         return view('admin.home', compact('pets', 'users'));
     }

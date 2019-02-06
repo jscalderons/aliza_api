@@ -4,16 +4,24 @@
 
 @section('breadcrumb')
     <li class="breadcrumb-item">
-        <i class="far fa-newspaper"></i>
+        <a href="{{ route('posts.index') }}">
+            <i class="far fa-newspaper"></i>
+            Publicaciones
+        </a>
     </li>
-    <li class="breadcrumb-item">
-        <a href="{{ route('posts.index') }}">Lista</a>
+    <li class="breadcrumb-item active" aria-current="page">
+        <i class="far fa-edit"></i>
+        {{$post->title}}
     </li>
-    <li class="breadcrumb-item active" aria-current="page">Editar publicación</li>
 @endsection
 
-@section('header-page')
-    Editar publicación <small>{{$post->title}}</small>
+@section('header-title')
+    <i class="far fa-edit"></i>
+    Editar Publicación:
+@endsection
+
+@section('header-subtitle')
+    {{$post->title}}
 @endsection
 
 @section('actions-page')
@@ -43,10 +51,12 @@
                 <div class="col-lg-4 col-sm-12">
                     <div class="form-group">
                         <label for="">Imagen</label>
-                        <input type="file" name="image" class="form-control-file" id="inputFile">
-                        <div id="preview" class="mt-2">
-                            <img src="/storage/images/posts/{{$post->uid}}/{{$post->image}}" alt="{{$post->image}}" class="img-fluid img-thumbnail w-100">
-                        </div>
+                        <input-file name="image" :default-files="{
+                            base: '/storage/images/posts/{{$post->uid}}',
+                            files: [{
+                                filename: '{{$post->image}}'
+                            }]
+                        }" />
                     </div>
                 </div>
             </div>
@@ -55,7 +65,7 @@
     </div>
 </form>
 @endsection
-
+{{--
 @section('scripts')
     <script>
         (function() {
@@ -77,4 +87,4 @@
             });
         })()
     </script>
-@endsection
+@endsection --}}
