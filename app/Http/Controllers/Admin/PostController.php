@@ -98,7 +98,12 @@ class PostController extends Controller
         if ($request->hasFile('image'))
         {
             $path = "{$this->storageFolder}/{$uid}";
-            $this->uploadImage($request->image, $path, $post->image);
+            $post->image = $this->generateFilename();
+
+            if ($this->uploadImage($request->image, $path, $post->image))
+            {
+                $this->deleteImage($path, $post->getOriginal('image'));
+            }
         }
 
         if ($post->update($request->all()))

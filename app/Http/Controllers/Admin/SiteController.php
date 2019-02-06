@@ -104,7 +104,12 @@ class SiteController extends Controller
         if ($request->hasFile('image'))
         {
             $path = "{$this->storageFolder}/{$uid}";
-            $this->uploadImage($request->image, $path, $site->image);
+            $site->image = $this->generateFilename();
+
+            if ($this->uploadImage($request->image, $path, $site->image))
+            {
+                $this->deleteImage($path, $site->getOriginal('image'));
+            }
         }
 
         if ($site->update($request->all()))
