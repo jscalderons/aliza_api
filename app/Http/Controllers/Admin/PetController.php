@@ -11,7 +11,9 @@ class PetController extends Controller
 
     public function index()
     {
-        return view('admin.pets.index');
+        $pets = Pet::with(['process', 'user'])->paginate(10);
+
+        return view('admin.pets.index', compact('pets'));
     }
 
     public function approve(Pet $pet)

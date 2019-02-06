@@ -39,6 +39,10 @@ class Pet extends Model
 
     protected $appends = ['isFavorite'];
 
+    public function process() {
+        return $this->hasOne('App\Process', 'id', 'process_id');
+    }
+
     public function images() {
         return $this->hasMany('App\ImagesPet', 'pet_uid', 'uid');
     }

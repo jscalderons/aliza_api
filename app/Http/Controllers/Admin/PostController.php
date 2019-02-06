@@ -21,7 +21,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with(['user'])->paginate(10);
 
         return view('admin.posts.index', compact('posts'));
     }
@@ -102,7 +102,7 @@ class PostController extends Controller
 
             if ($this->uploadImage($request->image, $path, $post->image))
             {
-                $this->deleteImage($path, $post->getOriginal('image'));
+                if ($oldFilename = $post->getOriginal('image')) $this->deleteImage($path, $oldFilename);
             }
         }
 

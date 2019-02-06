@@ -47738,7 +47738,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.card-columns[data-v-15b43ac0] {\n  padding-top: 2rem;\n}\n", ""]);
+exports.push([module.i, "\n.nav-tabs .nav-link.active[data-v-15b43ac0] {\n  background-color: #fff;\n}\n.zoomOutRight-leave-active[data-v-15b43ac0] {\n  -webkit-animation: zoomOutRight-data-v-15b43ac0 1s;\n          animation: zoomOutRight-data-v-15b43ac0 1s;\n}\n.zoomOutLeft-leave-active[data-v-15b43ac0] {\n  -webkit-animation: zoomOutLeft-data-v-15b43ac0 1s;\n          animation: zoomOutLeft-data-v-15b43ac0 1s;\n}\n@-webkit-keyframes zoomOutLeft-data-v-15b43ac0 {\n40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);\n            transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);\n}\nto {\n    opacity: 0;\n    -webkit-transform: scale(0.1) translate3d(-200px, 0, 0);\n            transform: scale(0.1) translate3d(-200px, 0, 0);\n    -webkit-transform-origin: left center;\n            transform-origin: left center;\n}\n}\n@keyframes zoomOutLeft-data-v-15b43ac0 {\n40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);\n            transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);\n}\nto {\n    opacity: 0;\n    -webkit-transform: scale(0.1) translate3d(-200px, 0, 0);\n            transform: scale(0.1) translate3d(-200px, 0, 0);\n    -webkit-transform-origin: left center;\n            transform-origin: left center;\n}\n}\n@-webkit-keyframes zoomOutRight-data-v-15b43ac0 {\n40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);\n            transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);\n}\nto {\n    opacity: 0;\n    -webkit-transform: scale(0.1) translate3d(200px, 0, 0);\n            transform: scale(0.1) translate3d(200px, 0, 0);\n    -webkit-transform-origin: right center;\n            transform-origin: right center;\n}\n}\n@keyframes zoomOutRight-data-v-15b43ac0 {\n40% {\n    opacity: 1;\n    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);\n            transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);\n}\nto {\n    opacity: 0;\n    -webkit-transform: scale(0.1) translate3d(200px, 0, 0);\n            transform: scale(0.1) translate3d(200px, 0, 0);\n    -webkit-transform-origin: right center;\n            transform-origin: right center;\n}\n}\n", ""]);
 
 // exports
 
@@ -47784,6 +47784,11 @@ module.exports = function listToStyles (parentId, list) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PetCard__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__PetCard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__PetCard__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -47990,7 +47995,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.card[data-v-4ce8de7d] {\n  -webkit-transition: all .5s;\n  transition: all .5s;\n  border-radius: 8px;\n  border: none;\n  -webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);\n          box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);\n  overflow: hidden;\n  min-height: 280px;\n}\n.card img.card-img[data-v-4ce8de7d] {\n    -webkit-transition: all 2s;\n    transition: all 2s;\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n.card .card-img-overlay[data-v-4ce8de7d] {\n    color: white;\n    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(transparent));\n    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.card .card-img-overlay .card-text[data-v-4ce8de7d] {\n      -webkit-transition: opacity .5s;\n      transition: opacity .5s;\n      opacity: 0;\n}\n.card .card-img-overlay .card-accions[data-v-4ce8de7d] {\n      margin-top: auto;\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n}\n.card .card-img-overlay .card-accions button.btn[data-v-4ce8de7d] {\n        width: 60px;\n        height: 60px;\n        border-radius: 50%;\n        font-size: x-large;\n        -webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);\n                box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-pack: center;\n            -ms-flex-pack: center;\n                justify-content: center;\n        -webkit-box-align: center;\n            -ms-flex-align: center;\n                align-items: center;\n}\n.card[data-v-4ce8de7d]:hover {\n    cursor: pointer;\n    -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);\n            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);\n}\n.card:hover img.card-img[data-v-4ce8de7d] {\n      -webkit-transform: scale(1.2);\n              transform: scale(1.2);\n}\n.card:hover .card-img-overlay .card-text[data-v-4ce8de7d] {\n      opacity: 1;\n}\n", ""]);
+exports.push([module.i, "\n.card[data-v-4ce8de7d] {\n  -webkit-transition: all .5s;\n  transition: all .5s;\n  border-radius: 8px;\n  border: none;\n  -webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);\n          box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);\n  overflow: hidden;\n  min-height: 280px;\n  position: relative;\n}\n.card img.card-img[data-v-4ce8de7d] {\n    -webkit-transition: all 2s;\n    transition: all 2s;\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n.card .card-img-overlay[data-v-4ce8de7d] {\n    color: white;\n    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(transparent));\n    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n.card .card-img-overlay .card-text[data-v-4ce8de7d] {\n      -webkit-transition: opacity .5s;\n      transition: opacity .5s;\n      opacity: 0;\n}\n.card .card-img-overlay .card-accions[data-v-4ce8de7d] {\n      margin-top: auto;\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -ms-flex-pack: distribute;\n          justify-content: space-around;\n}\n.card .card-img-overlay .card-accions button.btn[data-v-4ce8de7d] {\n        width: 60px;\n        height: 60px;\n        border-radius: 50%;\n        font-size: x-large;\n        -webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);\n                box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);\n        display: -webkit-box;\n        display: -ms-flexbox;\n        display: flex;\n        -webkit-box-pack: center;\n            -ms-flex-pack: center;\n                justify-content: center;\n        -webkit-box-align: center;\n            -ms-flex-align: center;\n                align-items: center;\n}\n.card[data-v-4ce8de7d]:hover {\n    cursor: pointer;\n    -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);\n            box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);\n}\n.card:hover img.card-img[data-v-4ce8de7d] {\n      -webkit-transform: scale(1.2);\n              transform: scale(1.2);\n}\n.card:hover .card-img-overlay .card-text[data-v-4ce8de7d] {\n      opacity: 1;\n}\n", ""]);
 
 // exports
 
@@ -48168,108 +48173,120 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "tab-content", attrs: { id: "myTabContent" } }, [
-      _c(
-        "div",
-        {
-          staticClass: "tab-pane fade show active",
-          attrs: {
-            id: "approved",
-            role: "tabpanel",
-            "aria-labelledby": "approved-tab"
-          }
-        },
-        [
+    _c("div", { staticClass: "card border-top-0" }, [
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "card-columns" }, [
           _c(
             "div",
-            { staticClass: "card-columns" },
-            _vm._l(_vm.petsApproved, function(pet) {
-              return _c(
-                "pet-card",
+            { staticClass: "tab-content", attrs: { id: "myTabContent" } },
+            [
+              _c(
+                "div",
                 {
-                  key: pet.uid,
-                  attrs: { pet: pet },
-                  on: { approve: _vm.approve, reject: _vm.reject }
+                  staticClass: "tab-pane fade show active",
+                  attrs: {
+                    id: "approved",
+                    role: "tabpanel",
+                    "aria-labelledby": "approved-tab"
+                  }
                 },
                 [
-                  _c("template", { slot: "actions" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.approve(pet.uid)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "far fa-thumbs-up" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.reject(pet.uid)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "far fa-thumbs-down" })]
-                    )
-                  ])
+                  _c(
+                    "transition-group",
+                    { attrs: { name: "zoomOutRight" } },
+                    _vm._l(_vm.petsApproved, function(pet) {
+                      return _c(
+                        "pet-card",
+                        {
+                          key: pet.uid,
+                          attrs: { pet: pet },
+                          on: { approve: _vm.approve, reject: _vm.reject }
+                        },
+                        [
+                          _c("template", { slot: "actions" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.approve(pet.uid)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "far fa-thumbs-up" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.reject(pet.uid)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "far fa-thumbs-down" })]
+                            )
+                          ])
+                        ],
+                        2
+                      )
+                    })
+                  )
                 ],
-                2
-              )
-            })
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "tab-pane fade",
-          attrs: {
-            id: "rejected",
-            role: "tabpanel",
-            "aria-labelledby": "rejected-tab"
-          }
-        },
-        [
-          _c(
-            "div",
-            { staticClass: "card-columns" },
-            _vm._l(_vm.petsRejected, function(pet) {
-              return _c(
-                "pet-card",
-                { key: pet.uid, attrs: { pet: pet } },
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "tab-pane fade",
+                  attrs: {
+                    id: "rejected",
+                    role: "tabpanel",
+                    "aria-labelledby": "rejected-tab"
+                  }
+                },
                 [
-                  _c("template", { slot: "actions" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.restore(pet.uid)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-trash-restore" })]
-                    )
-                  ])
+                  _c(
+                    "transition-group",
+                    { attrs: { name: "zoomOutLeft" } },
+                    _vm._l(_vm.petsRejected, function(pet) {
+                      return _c(
+                        "pet-card",
+                        { key: pet.uid, attrs: { pet: pet } },
+                        [
+                          _c("template", { slot: "actions" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.restore(pet.uid)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fas fa-trash-restore" })]
+                            )
+                          ])
+                        ],
+                        2
+                      )
+                    })
+                  )
                 ],
-                2
+                1
               )
-            })
+            ]
           )
-        ]
-      )
+        ])
+      ])
     ])
   ])
 }
@@ -62711,6 +62728,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     this.valid = false;
                 } else {
                     this.files = files;
+                    this.invalid = false;
                     this.valid = true;
                     if (e.dataTransfer) this.$refs.inputFile.files = files;
                 }

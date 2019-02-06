@@ -73,6 +73,7 @@ export default {
                     this.valid = false;
                 } else {
                     this.files = files;
+                    this.invalid = false;
                     this.valid = true;
                     if (e.dataTransfer)
                         this.$refs.inputFile.files = files;

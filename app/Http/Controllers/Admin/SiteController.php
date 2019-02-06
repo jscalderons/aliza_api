@@ -22,9 +22,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $sites = Site::all();
-
-        // dd($sites[0]->category);
+        $sites = Site::with(['category', 'user'])->paginate(10);
 
         return view('admin.sites.index', compact('sites'));
     }
@@ -108,7 +106,7 @@ class SiteController extends Controller
 
             if ($this->uploadImage($request->image, $path, $site->image))
             {
-                $this->deleteImage($path, $site->getOriginal('image'));
+                if ($oldFilename = $site->getOriginal('image')) $this->deleteImage($path, $oldFilename);
             }
         }
 

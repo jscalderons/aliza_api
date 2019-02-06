@@ -16,40 +16,45 @@
                 </a>
             </li>
         </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="approved" role="tabpanel" aria-labelledby="approved-tab">
+        <div class="card border-top-0">
+            <div class="card-body">
                 <div class="card-columns">
-                    <pet-card v-for="pet in petsApproved" :key="pet.uid"
-                                :pet="pet"
-                                @approve="approve"
-                                @reject="reject">
-                        <template slot="actions">
-                            <button type="button" class="btn btn-success" @click="approve(pet.uid)">
-                                <i class="far fa-thumbs-up"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger" @click="reject(pet.uid)">
-                                <i class="far fa-thumbs-down"></i>
-                            </button>
-                        </template>
-                    </pet-card>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
-                <div class="card-columns">
-                    <pet-card v-for="pet in petsRejected"
-                                :key="pet.uid"
-                                :pet="pet">
-                        <template slot="actions">
-                            <button type="button" class="btn btn-primary" @click="restore(pet.uid)">
-                                <i class="fas fa-trash-restore"></i>
-                            </button>
-                        </template>
-                    </pet-card>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="approved" role="tabpanel" aria-labelledby="approved-tab">
+                            <transition-group name="zoomOutRight">
+                                <pet-card v-for="pet in petsApproved" :key="pet.uid"
+                                            :pet="pet"
+                                            @approve="approve"
+                                            @reject="reject">
+                                    <template slot="actions">
+                                        <button type="button" class="btn btn-success" @click="approve(pet.uid)">
+                                            <i class="far fa-thumbs-up"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger" @click="reject(pet.uid)">
+                                            <i class="far fa-thumbs-down"></i>
+                                        </button>
+                                    </template>
+                                </pet-card>
+                            </transition-group>
+                        </div>
+                        <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
+                            <transition-group name="zoomOutLeft">
+                                <pet-card v-for="pet in petsRejected"
+                                        :key="pet.uid"
+                                        :pet="pet">
+                                    <template slot="actions">
+                                        <button type="button" class="btn btn-primary" @click="restore(pet.uid)">
+                                            <i class="fas fa-trash-restore"></i>
+                                        </button>
+                                    </template>
+                                </pet-card>
+                            </transition-group>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
 </template>
 
 <script>
@@ -114,8 +119,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-columns {
-    padding-top: 2rem;
+.nav-tabs {
+    .nav-link.active {
+        background-color: #fff;
+    }
+}
+
+.zoomOutRight-leave-active {
+  animation: zoomOutRight 1s;
+}
+
+.zoomOutLeft-leave-active {
+  animation: zoomOutLeft 1s;
+}
+
+@keyframes zoomOutLeft {
+  40% {
+    opacity: 1;
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(42px, 0, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.1) translate3d(-200px, 0, 0);
+    transform-origin: left center;
+  }
+}
+
+@keyframes zoomOutRight {
+  40% {
+    opacity: 1;
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(-42px, 0, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.1) translate3d(200px, 0, 0);
+    transform-origin: right center;
+  }
 }
 </style>
-
