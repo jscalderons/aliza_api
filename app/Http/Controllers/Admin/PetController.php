@@ -11,7 +11,9 @@ class PetController extends Controller
 
     public function index()
     {
-        $pets = Pet::with(['process', 'user'])->get();
+        $pets = Pet::with(['process', 'user'])
+                    ->orderBy('created_at', 'desc')
+                    ->get();
 
         return view('admin.pets.index', compact('pets'));
     }

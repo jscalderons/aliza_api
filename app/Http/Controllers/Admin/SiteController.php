@@ -22,7 +22,9 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $sites = Site::with(['category', 'user'])->get();
+        $sites = Site::with(['category', 'user'])
+                    ->orderBy('created_at', 'desc')
+                    ->get();
 
         return view('admin.sites.index', compact('sites'));
     }

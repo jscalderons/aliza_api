@@ -21,7 +21,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with(['user'])->get();
+        $posts = Post::with(['user'])
+                    ->orderBy('created_at', 'desc')
+                    ->get();
 
         return view('admin.posts.index', compact('posts'));
     }
