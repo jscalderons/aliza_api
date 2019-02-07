@@ -25,39 +25,36 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <div class="table-responsive">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Acciones</th>
-                            <th>uid</th>
-                            <th>Titulo</th>
-                            <th>Usuario</th>
-                            {{-- <th>Cuerpo</th> --}}
-                            <th>Imagen</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($posts as $post)
-                            <tr>
-                                <td>
-                                    <a href="{{ route('posts.edit', $post->uid) }}" class="btn btn-link">
-                                        <i class="fas fa-pen"></i>
-                                    </a>
-                                </td>
-                                <td>{{ $post->uid }}</td>
-                                <td>{{ $post->title }}</td>
-                                <td>{{ $post->user->name }}</td>
-                                {{-- <td>{{ $post->body }}</td> --}}
-                                <td>{{ $post->image }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            {{ $posts->links() }}
-        </div>
+
+        <data-table>
+            <template v-slot:thead>
+                <tr>
+                    <th>Acciones</th>
+                    <th class="d-none">uid</th>
+                    <th>Titulo</th>
+                    <th>Usuario</th>
+                    {{-- <th>Cuerpo</th> --}}
+                    <th>Imagen</th>
+                </tr>
+            </template>
+            <template v-slot:tbody>
+                @foreach ($posts as $post)
+                    <tr>
+                        <td>
+                            <a href="{{ route('posts.edit', $post->uid) }}" class="btn btn-link">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                        </td>
+                        <td searchable class="d-none">{{ $post->uid }}</td>
+                        <td searchable>{{ $post->title }}</td>
+                        <td searchable>{{ $post->user->name }}</td>
+                        {{-- <td>{{ $post->body }}</td> --}}
+                        <td>{{ $post->image }}</td>
+                    </tr>
+                @endforeach
+            </template>
+        </data-table>
+
     </div>
 </div>
 @endsection

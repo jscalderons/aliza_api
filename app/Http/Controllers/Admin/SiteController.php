@@ -22,7 +22,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        $sites = Site::with(['category', 'user'])->paginate(10);
+        $sites = Site::with(['category', 'user'])->get();
 
         return view('admin.sites.index', compact('sites'));
     }
