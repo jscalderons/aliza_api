@@ -15,7 +15,7 @@
 @endsection
 
 @section('actions-page')
-    <a href="#" class="btn btn-primary disabled">
+    <a href="{{ route('pets.create') }}" class="btn btn-primary">
         <i class="fas fa-plus"></i>
         Agregar
     </a>
@@ -28,6 +28,7 @@
             <template v-slot:thead>
                 <tr>
                     <th>Acciones</th>
+                    <th>index</th>
                     <th class="d-none">uid</th>
                     <th>Proceso</th>
                     <th>Usuario</th>
@@ -36,13 +37,13 @@
                 </tr>
             </template>
             <template v-slot:tbody>
-                @foreach ($pets as $pet)
+                @foreach ($pets as $index => $pet)
                     <tr>
                         <td>
-                            <a href="#" class="btn btn-link disabled">
-                                <i class="fas fa-pen"></i>
-                            </a>
+                            <a href="{{ route('pets.edit', $pet) }}" class="btn btn-link"><i class="fas fa-pen"></i></a>
+                            {{-- <a href="#" class="btn btn-link"><i class="fas fa-trash"></i></a> --}}
                         </td>
+                        <td>{{$index + 1}}</td>
                         <td searchable class="d-none">{{ $pet->uid }}</td>
                         <td searchable>{{ $pet->process->name }}</td>
                         <td searchable>{{ $pet->user->name }}</td>

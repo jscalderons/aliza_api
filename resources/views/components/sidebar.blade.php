@@ -14,7 +14,7 @@
             </a>
         </li>
         <li class="{{ Request::is('pets', 'pets/*') ? 'active' : '' }}">
-            <a href="{{ route('pets') }}">
+            <a href="{{ route('pets.index') }}">
                 <span>
                     <i class="fas fa-paw fa-fw"></i>
                     Mascotas

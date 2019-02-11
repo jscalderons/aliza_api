@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function() {
     Route::namespace('Admin')->group(function() {
         // ================== PETS ================== //
         // [GET]
-        Route::get('pets', 'PetController@index')->name('pets');
+        Route::resource('pets', 'PetController');
         Route::get('pets/approved', 'PetController@getPetListToApproved');
         Route::get('pets/rejected', 'PetController@getPetListToRejected');
 
@@ -39,6 +39,8 @@ Route::middleware('auth')->group(function() {
         Route::put('pet/{pet}/approve', 'PetController@approve');
         Route::put('pet/{pet}/reject', 'PetController@reject');
         Route::put('pet/{uid}/restore', 'PetController@restore');
+
+        Route::post('pet/upload', 'PetController@upload');
 
         // ================== POSTS ================== //
         Route::resource('posts', 'PostController');

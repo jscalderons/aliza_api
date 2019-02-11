@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input-search />
+        <input-search :rows="rows" />
         <div class="table-responsive">
             <table class="table" ref="table">
                 <thead>
@@ -20,6 +20,14 @@ import InputSearch from './InputSearch';
 export default {
     components: {
         InputSearch
+    },
+    data() {
+        return {
+            rows: []
+        }
+    },
+    mounted() {
+        this.rows = this.$refs.table.querySelectorAll('tbody tr');
     }
 }
 </script>

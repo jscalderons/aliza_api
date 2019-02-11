@@ -23,6 +23,7 @@ window.Vue = require('vue');
 Vue.component("pet-card-container", require("./components/PetCardContainer"));
 Vue.component("textarea-editor", require("./components/TextareaEditor"));
 Vue.component("input-file", require("./components/InputFile"));
+Vue.component("dropzone-image", require("./components/DropzoneImage"));
 Vue.component("data-table", require("./components/DataTable"));
 
 /**

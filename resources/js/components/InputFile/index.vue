@@ -10,6 +10,7 @@
         @dragover="dragOverHandle"
         @dragleave="dragLeaveHandle"
         @drop="dropHandle">
+
         <input style="display: none"
                 type="file"
                 ref="inputFile"
@@ -17,28 +18,17 @@
                 :accept="accept"
                 :multiple="multiple"
                 @change="fileHandle"/>
-        <div v-if="files.length" class="file-input--preview" >
-            <img v-for="(file, index) in files"
-                :key="index"
-                :src="getURI(file)"
-                :alt="file.filename"
-                class="file-input--preview-img" />
-        </div>
-        <div v-else-if="defaultFiles" class="file-input--preview">
-            <img v-for="(file, index) in defaultFiles.files"
-                :key="index"
-                :src="`${defaultFiles.base}/${file.filename}`"
-                :alt="file.filename"
-                class="file-input--preview-img" />
-        </div>
-        <span v-else>
-            Arrastra los archivos aquí o haga click aquí
-        </span>
+
+        <images-preview :multiple="multiple" :default-files="defaultFiles" />
     </div>
 </template>
 
 <script>
+import ImagesPreview from "./ImagesPreview";
 export default {
+    components: {
+        ImagesPreview
+    },
     props: {
         accept: {
             type: String,
@@ -63,16 +53,25 @@ export default {
     methods: {
         fileHandle(e) {
             const files = e.target.files || e.dataTransfer.files;
+            const oldFiles = this.files;
 
+            this.files = [];
 
             if (files.length) {
-                this.files = [];
 
                 if (files[0].type != this.accept) {
                     this.invalid = true;
                     this.valid = false;
                 } else {
-                    this.files = files;
+                    // if (this.multiple) {
+                    //     const newFiles = ;
+
+                    //     this.files = oldFiles.concat(newFiles);
+                    // } else {
+                    //     this.files = files;
+                    // }
+
+                    this.files = Array.from(files);
                     this.invalid = false;
                     this.valid = true;
                     if (e.dataTransfer)
@@ -91,68 +90,56 @@ export default {
             this.fileHandle(e);
             this.active = false;
         },
-        getURI(file) {
-            return URL.createObjectURL(file);
-        }
-    }
+    },
 }
 </script>
 
 <style lang="scss" scoped>
-    .file-input {
-        width: 100%;
-        min-height: 200px;
-        border: 2px dashed gray;
-        border-radius: 10px;
-        display: flex;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        color: gray;
+.file-input {
+    width: 100%;
+    min-height: 200px;
+    border: 2px dashed gray;
+    border-radius: 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+    padding: .7rem;
 
-        &:hover {
-            cursor: pointer;
-        }
-
-        &.valid {
-            border-color: var(--success);
-        }
-
-        &.invalid {
-            border-color: var(--danger);
-        }
-
-        &.active {
-            border-color: var(--primary);
-            animation-duration: 1s;
-            animation-fill-mode: both;
-            animation-iteration-count: infinite;
-            animation-name: pulse;
-        }
-        .file-input--preview {
-            width: 100%;
-            height: 100%;
-            padding: .7rem;
-
-            .file-input--preview-img {
-                display: inline-block;
-                border-radius: 10px;
-                width: 100%;
-            }
-        }
+    &:hover {
+        cursor: pointer;
     }
 
-    @keyframes pulse {
-        from {
-            transform: scale3d(1, 1, 1);
-        }
-
-        50% {
-            transform: scale3d(1.05, 1.05, 1.05);
-        }
-
-        to {
-            transform: scale3d(1, 1, 1);
-        }
+    &.valid {
+        border-color: var(--success);
     }
+
+    &.invalid {
+        border-color: var(--danger);
+    }
+
+    &.active {
+        border-color: var(--primary);
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-iteration-count: infinite;
+        animation-name: pulse;
+    }
+
+}
+
+@keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+
+    50% {
+        transform: scale3d(1.05, 1.05, 1.05);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
 </style>

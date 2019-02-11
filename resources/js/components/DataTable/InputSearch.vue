@@ -12,6 +12,7 @@
 
 <script>
 export default {
+    props: ['rows'],
     data() {
         return {
             query: '',
@@ -19,16 +20,15 @@ export default {
     },
     methods: {
         searchHandle(e) {
-            const trs = this.$parent.$refs.table.querySelectorAll('tbody tr');
             const query = e.target.value.toUpperCase();
 
-            trs.forEach(tr => {
-                const tds = tr.querySelectorAll("td");
+            this.rows.forEach(row => {
+                const cols = row.querySelectorAll("td");
                 let isValid = false;
 
-                tds.forEach(td => {
-                    if (td.attributes.hasOwnProperty('searchable')) {
-                        const txtValue = td.textContent || td.innerText;
+                cols.forEach(col => {
+                    if (col.attributes.hasOwnProperty('searchable')) {
+                        const txtValue = col.textContent || col.innerText;
 
                         if (txtValue.toUpperCase().includes(query)) {
                             isValid = true;
@@ -37,9 +37,9 @@ export default {
                 });
 
                 if (isValid) {
-                    tr.style.display = "";
+                    row.style.display = "";
                 } else {
-                    tr.style.display = "none";
+                    row.style.display = "none";
                 }
             });
         }
