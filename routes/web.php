@@ -31,7 +31,11 @@ Route::middleware('auth')->group(function() {
     Route::namespace('Admin')->group(function() {
         // ================== PETS ================== //
         // [GET]
-        Route::resource('pets', 'PetController');
+        Route::get('/pets', 'PetController@index')->name('pets.index');
+        Route::get('/pets/create', 'PetController@create')->name('pets.create');
+        Route::get('/pets/{pet}/edit', 'PetController@edit')->name('pets.edit');
+        Route::post('/pets', 'PetController@store')->name('pets.store');
+        Route::put('/pets/{pet}', 'PetController@update')->name('pets.update');
         Route::get('pets/approved', 'PetController@getPetListToApproved');
         Route::get('pets/rejected', 'PetController@getPetListToRejected');
 
